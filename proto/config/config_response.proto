@@ -1,0 +1,51 @@
+syntax = "proto3";
+package nacos.config;
+
+option go_package = "github.com/cxhello/nacos-sdk-proto/go/config";
+
+// metadata.type = "ConfigQueryResponse"
+message ConfigQueryResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+  string content = 5;
+  string encryptedDataKey = 6;
+  string contentType = 7;
+  string md5 = 8;
+  int64 lastModified = 9;
+  bool isBeta = 10;
+  string tag = 11;
+}
+
+// metadata.type = "ConfigPublishResponse"
+message ConfigPublishResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+}
+
+// metadata.type = "ConfigRemoveResponse"
+message ConfigRemoveResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+}
+
+// metadata.type = "ConfigChangeBatchListenResponse"
+// NOTE: Java class name is ConfigChangeBatchListenResponse (NOT ConfigBatchListenResponse)
+message ConfigChangeBatchListenResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+  repeated ConfigContext changedConfigs = 5;
+}
+
+message ConfigContext {
+  string group = 1;
+  string dataId = 2;
+  string tenant = 3;
+}

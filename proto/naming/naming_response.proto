@@ -1,0 +1,34 @@
+syntax = "proto3";
+package nacos.naming;
+
+option go_package = "github.com/cxhello/nacos-sdk-proto/go/naming";
+
+import "naming/instance.proto";
+
+// metadata.type = "InstanceResponse"
+message InstanceResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+  string type = 5;
+}
+
+// metadata.type = "SubscribeServiceResponse"
+message SubscribeServiceResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+  ServiceInfo serviceInfo = 5;
+}
+
+// metadata.type = "QueryServiceResponse"
+// NOTE: Java class name is QueryServiceResponse (NOT ServiceQueryResponse)
+message QueryServiceResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+  ServiceInfo serviceInfo = 5;
+}

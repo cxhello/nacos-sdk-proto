@@ -1,0 +1,32 @@
+syntax = "proto3";
+package nacos.naming;
+
+option go_package = "github.com/cxhello/nacos-sdk-proto/go/naming";
+
+// Java: com.alibaba.nacos.api.naming.pojo.Instance
+message Instance {
+  string instanceId = 1;
+  string ip = 2;
+  int32 port = 3;
+  double weight = 4;
+  bool healthy = 5;
+  bool enabled = 6;
+  bool ephemeral = 7;
+  string clusterName = 8;
+  string serviceName = 9;
+  map<string, string> metadata = 10;
+}
+
+// Java: com.alibaba.nacos.api.naming.pojo.ServiceInfo
+// Note: jsonFromServer has @JsonIgnore, excluded
+message ServiceInfo {
+  string name = 1;
+  string groupName = 2;
+  string clusters = 3;
+  int64 cacheMillis = 4;
+  repeated Instance hosts = 5;
+  int64 lastRefTime = 6;
+  string checksum = 7;
+  bool allIps = 8;
+  bool reachProtectionThreshold = 9;
+}

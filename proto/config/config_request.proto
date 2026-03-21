@@ -1,0 +1,58 @@
+syntax = "proto3";
+package nacos.config;
+
+option go_package = "github.com/cxhello/nacos-sdk-proto/go/config";
+
+// metadata.type = "ConfigQueryRequest"
+message ConfigQueryRequest {
+  string requestId = 1;
+  string dataId = 2;
+  string group = 3;
+  string tenant = 4;
+  string tag = 5;
+}
+
+// metadata.type = "ConfigPublishRequest"
+message ConfigPublishRequest {
+  string requestId = 1;
+  string dataId = 2;
+  string group = 3;
+  string tenant = 4;
+  string content = 5;
+  string casMd5 = 6;
+  map<string, string> additionMap = 7;
+}
+
+// metadata.type = "ConfigRemoveRequest"
+message ConfigRemoveRequest {
+  string requestId = 1;
+  string dataId = 2;
+  string group = 3;
+  string tenant = 4;
+  string tag = 5;
+}
+
+// metadata.type = "ConfigBatchListenRequest"
+message ConfigBatchListenRequest {
+  string requestId = 1;
+  string dataId = 2;
+  string group = 3;
+  string tenant = 4;
+  bool listen = 5;
+  repeated ConfigListenContext configListenContexts = 6;
+}
+
+message ConfigListenContext {
+  string group = 1;
+  string md5 = 2;
+  string dataId = 3;
+  string tenant = 4;
+}
+
+// metadata.type = "ConfigChangeNotifyRequest" (server -> client)
+message ConfigChangeNotifyRequest {
+  string requestId = 1;
+  string dataId = 2;
+  string group = 3;
+  string tenant = 4;
+}

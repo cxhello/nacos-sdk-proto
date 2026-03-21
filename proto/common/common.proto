@@ -1,0 +1,71 @@
+syntax = "proto3";
+package nacos.common;
+
+option go_package = "github.com/cxhello/nacos-sdk-proto/go/common";
+
+// metadata.type = "ConnectionSetupRequest"
+message ConnectionSetupRequest {
+  string requestId = 1;
+  string clientVersion = 2;
+  string tenant = 3;
+  map<string, string> labels = 4;
+  map<string, bool> abilityTable = 5;
+}
+
+// metadata.type = "SetupAckRequest" (server -> client)
+message SetupAckRequest {
+  string requestId = 1;
+  map<string, bool> abilityTable = 2;
+}
+
+// metadata.type = "SetupAckResponse" (client -> server)
+message SetupAckResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+}
+
+// metadata.type = "ConnectResetRequest" (server -> client)
+message ConnectResetRequest {
+  string requestId = 1;
+  string serverIp = 2;
+  string serverPort = 3;
+  string connectionId = 4;
+}
+
+// metadata.type = "ServerCheckRequest"
+message ServerCheckRequest {
+  string requestId = 1;
+}
+
+// metadata.type = "ServerCheckResponse"
+message ServerCheckResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+  string connectionId = 5;
+  bool supportAbilityNegotiation = 6;
+}
+
+// metadata.type = "HealthCheckRequest"
+message HealthCheckRequest {
+  string requestId = 1;
+}
+
+// metadata.type = "HealthCheckResponse"
+message HealthCheckResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+}
+
+// metadata.type = "ErrorResponse"
+message ErrorResponse {
+  int32 resultCode = 1;
+  int32 errorCode = 2;
+  string message = 3;
+  string requestId = 4;
+}

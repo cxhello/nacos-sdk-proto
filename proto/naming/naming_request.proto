@@ -1,0 +1,37 @@
+syntax = "proto3";
+package nacos.naming;
+
+option go_package = "github.com/cxhello/nacos-sdk-proto/go/naming";
+
+import "naming/instance.proto";
+
+// metadata.type = "InstanceRequest"
+message InstanceRequest {
+  string requestId = 1;
+  string namespace = 2;
+  string serviceName = 3;
+  string groupName = 4;
+  string type = 5;
+  Instance instance = 6;
+}
+
+// metadata.type = "SubscribeServiceRequest"
+message SubscribeServiceRequest {
+  string requestId = 1;
+  string namespace = 2;
+  string serviceName = 3;
+  string groupName = 4;
+  bool subscribe = 5;
+  string clusters = 6;
+}
+
+// metadata.type = "ServiceQueryRequest"
+message ServiceQueryRequest {
+  string requestId = 1;
+  string namespace = 2;
+  string serviceName = 3;
+  string groupName = 4;
+  string cluster = 5;
+  bool healthyOnly = 6;
+  int32 udpPort = 7;
+}
