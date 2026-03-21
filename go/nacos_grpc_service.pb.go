@@ -154,21 +154,21 @@ var File_nacos_grpc_service_proto protoreflect.FileDescriptor
 
 const file_nacos_grpc_service_proto_rawDesc = "" +
 	"\n" +
-	"\x18nacos_grpc_service.proto\x12\x12nacos_grpc_service\x1a\x19google/protobuf/any.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xbb\x01\n" +
+	"\x18nacos_grpc_service.proto\x1a\x19google/protobuf/any.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x01\n" +
 	"\bMetadata\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1a\n" +
-	"\bclientIp\x18\b \x01(\tR\bclientIp\x12C\n" +
-	"\aheaders\x18\a \x03(\v2).nacos_grpc_service.Metadata.HeadersEntryR\aheaders\x1a:\n" +
+	"\bclientIp\x18\b \x01(\tR\bclientIp\x120\n" +
+	"\aheaders\x18\a \x03(\v2\x16.Metadata.HeadersEntryR\aheaders\x1a:\n" +
 	"\fHeadersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"m\n" +
-	"\aPayload\x128\n" +
-	"\bmetadata\x18\x02 \x01(\v2\x1c.nacos_grpc_service.MetadataR\bmetadata\x12(\n" +
-	"\x04body\x18\x03 \x01(\v2\x14.google.protobuf.AnyR\x04body2P\n" +
-	"\aRequest\x12E\n" +
-	"\arequest\x12\x1b.nacos_grpc_service.Payload\x1a\x1b.nacos_grpc_service.Payload\"\x002d\n" +
-	"\x0fBiRequestStream\x12Q\n" +
-	"\x0frequestBiStream\x12\x1b.nacos_grpc_service.Payload\x1a\x1b.nacos_grpc_service.Payload\"\x00(\x010\x01BJ\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"Z\n" +
+	"\aPayload\x12%\n" +
+	"\bmetadata\x18\x02 \x01(\v2\t.MetadataR\bmetadata\x12(\n" +
+	"\x04body\x18\x03 \x01(\v2\x14.google.protobuf.AnyR\x04body2*\n" +
+	"\aRequest\x12\x1f\n" +
+	"\arequest\x12\b.Payload\x1a\b.Payload\"\x002>\n" +
+	"\x0fBiRequestStream\x12+\n" +
+	"\x0frequestBiStream\x12\b.Payload\x1a\b.Payload\"\x00(\x010\x01BJ\n" +
 	"\x1fcom.alibaba.nacos.api.grpc.autoP\x01Z%github.com/cxhello/nacos-sdk-proto/gob\x06proto3"
 
 var (
@@ -185,19 +185,19 @@ func file_nacos_grpc_service_proto_rawDescGZIP() []byte {
 
 var file_nacos_grpc_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_nacos_grpc_service_proto_goTypes = []any{
-	(*Metadata)(nil),  // 0: nacos_grpc_service.Metadata
-	(*Payload)(nil),   // 1: nacos_grpc_service.Payload
-	nil,               // 2: nacos_grpc_service.Metadata.HeadersEntry
+	(*Metadata)(nil),  // 0: Metadata
+	(*Payload)(nil),   // 1: Payload
+	nil,               // 2: Metadata.HeadersEntry
 	(*anypb.Any)(nil), // 3: google.protobuf.Any
 }
 var file_nacos_grpc_service_proto_depIdxs = []int32{
-	2, // 0: nacos_grpc_service.Metadata.headers:type_name -> nacos_grpc_service.Metadata.HeadersEntry
-	0, // 1: nacos_grpc_service.Payload.metadata:type_name -> nacos_grpc_service.Metadata
-	3, // 2: nacos_grpc_service.Payload.body:type_name -> google.protobuf.Any
-	1, // 3: nacos_grpc_service.Request.request:input_type -> nacos_grpc_service.Payload
-	1, // 4: nacos_grpc_service.BiRequestStream.requestBiStream:input_type -> nacos_grpc_service.Payload
-	1, // 5: nacos_grpc_service.Request.request:output_type -> nacos_grpc_service.Payload
-	1, // 6: nacos_grpc_service.BiRequestStream.requestBiStream:output_type -> nacos_grpc_service.Payload
+	2, // 0: Metadata.headers:type_name -> Metadata.HeadersEntry
+	0, // 1: Payload.metadata:type_name -> Metadata
+	3, // 2: Payload.body:type_name -> google.protobuf.Any
+	1, // 3: Request.request:input_type -> Payload
+	1, // 4: BiRequestStream.requestBiStream:input_type -> Payload
+	1, // 5: Request.request:output_type -> Payload
+	1, // 6: BiRequestStream.requestBiStream:output_type -> Payload
 	5, // [5:7] is the sub-list for method output_type
 	3, // [3:5] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

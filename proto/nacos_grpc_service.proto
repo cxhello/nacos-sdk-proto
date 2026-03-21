@@ -20,8 +20,6 @@ syntax = "proto3";
 import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
 
-package nacos_grpc_service;
-
 option java_multiple_files = true;
 option java_package = "com.alibaba.nacos.api.grpc.auto";
 option go_package = "github.com/cxhello/nacos-sdk-proto/go";

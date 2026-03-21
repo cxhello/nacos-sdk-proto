@@ -34,7 +34,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Request_Request_FullMethodName = "/nacos_grpc_service.Request/request"
+	Request_Request_FullMethodName = "/Request/request"
 )
 
 // RequestClient is the client API for Request service.
@@ -125,7 +125,7 @@ func _Request_Request_Handler(srv interface{}, ctx context.Context, dec func(int
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Request_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "nacos_grpc_service.Request",
+	ServiceName: "Request",
 	HandlerType: (*RequestServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -138,7 +138,7 @@ var Request_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	BiRequestStream_RequestBiStream_FullMethodName = "/nacos_grpc_service.BiRequestStream/requestBiStream"
+	BiRequestStream_RequestBiStream_FullMethodName = "/BiRequestStream/requestBiStream"
 )
 
 // BiRequestStreamClient is the client API for BiRequestStream service.
@@ -221,7 +221,7 @@ type BiRequestStream_RequestBiStreamServer = grpc.BidiStreamingServer[Payload, P
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var BiRequestStream_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "nacos_grpc_service.BiRequestStream",
+	ServiceName: "BiRequestStream",
 	HandlerType: (*BiRequestStreamServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
