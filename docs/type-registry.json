@@ -1,0 +1,170 @@
+[
+  {
+    "type": "ConnectionSetupRequest",
+    "module": "common",
+    "proto": "proto/common/common.proto#ConnectionSetupRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "SetupAckRequest",
+    "module": "common",
+    "proto": "proto/common/common.proto#SetupAckRequest",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "SetupAckResponse",
+    "module": "common",
+    "proto": "proto/common/common.proto#SetupAckResponse",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConnectResetRequest",
+    "module": "common",
+    "proto": "proto/common/common.proto#ConnectResetRequest",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ServerCheckRequest",
+    "module": "common",
+    "proto": "proto/common/common.proto#ServerCheckRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ServerCheckResponse",
+    "module": "common",
+    "proto": "proto/common/common.proto#ServerCheckResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "HealthCheckRequest",
+    "module": "common",
+    "proto": "proto/common/common.proto#HealthCheckRequest",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "HealthCheckResponse",
+    "module": "common",
+    "proto": "proto/common/common.proto#HealthCheckResponse",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ErrorResponse",
+    "module": "common",
+    "proto": "proto/common/common.proto#ErrorResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigQueryRequest",
+    "module": "config",
+    "proto": "proto/config/config_request.proto#ConfigQueryRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigPublishRequest",
+    "module": "config",
+    "proto": "proto/config/config_request.proto#ConfigPublishRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigRemoveRequest",
+    "module": "config",
+    "proto": "proto/config/config_request.proto#ConfigRemoveRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigBatchListenRequest",
+    "module": "config",
+    "proto": "proto/config/config_request.proto#ConfigBatchListenRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigChangeNotifyRequest",
+    "module": "config",
+    "proto": "proto/config/config_request.proto#ConfigChangeNotifyRequest",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigQueryResponse",
+    "module": "config",
+    "proto": "proto/config/config_response.proto#ConfigQueryResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigPublishResponse",
+    "module": "config",
+    "proto": "proto/config/config_response.proto#ConfigPublishResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigRemoveResponse",
+    "module": "config",
+    "proto": "proto/config/config_response.proto#ConfigRemoveResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ConfigChangeBatchListenResponse",
+    "module": "config",
+    "proto": "proto/config/config_response.proto#ConfigChangeBatchListenResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "InstanceRequest",
+    "module": "naming",
+    "proto": "proto/naming/naming_request.proto#InstanceRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "SubscribeServiceRequest",
+    "module": "naming",
+    "proto": "proto/naming/naming_request.proto#SubscribeServiceRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "ServiceQueryRequest",
+    "module": "naming",
+    "proto": "proto/naming/naming_request.proto#ServiceQueryRequest",
+    "direction": "client-to-server",
+    "since": "2.0.0"
+  },
+  {
+    "type": "InstanceResponse",
+    "module": "naming",
+    "proto": "proto/naming/naming_response.proto#InstanceResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "SubscribeServiceResponse",
+    "module": "naming",
+    "proto": "proto/naming/naming_response.proto#SubscribeServiceResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  },
+  {
+    "type": "QueryServiceResponse",
+    "module": "naming",
+    "proto": "proto/naming/naming_response.proto#QueryServiceResponse",
+    "direction": "server-to-client",
+    "since": "2.0.0"
+  }
+]
