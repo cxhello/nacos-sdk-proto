@@ -89,12 +89,17 @@ jobs:
         if: steps.check.outputs.needed == 'true'
         run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
 
-      - name: Generate
+      - name: Link nacos for Makefile
+        if: steps.check.outputs.needed == 'true'
+        run: ln -s "$GITHUB_WORKSPACE/nacos" nacos-sdk-proto/.nacos
+
+      - name: Generate and verify
         if: steps.check.outputs.needed == 'true'
         run: |
           cd nacos-sdk-proto
           make generate-proto
           make generate
+          make verify
 
       - name: Update VERSION
         if: steps.check.outputs.needed == 'true'
@@ -107,10 +112,6 @@ jobs:
             "generated_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           }
           VEOF
-
-      - name: Verify
-        if: steps.check.outputs.needed == 'true'
-        run: cd nacos-sdk-proto/go && go build ./...
 
       - name: Check diff and create PR
         if: steps.check.outputs.needed == 'true'
