@@ -1,5 +1,5 @@
 .PHONY: generate generate-proto generate-go generate-python generate-nodejs \
-        clean verify sync-go-mod migrate sync setup update-version
+        clean verify verify-build sync-go-mod migrate sync setup update-version
 
 # === 仓库配置（转移时只改这一行） ===
 REPO_OWNER     := cxhello
@@ -100,7 +100,7 @@ update-version:
 	printf '{\n  "source": "local",\n  "nacos_ref": "develop",\n  "nacos_commit": "%s",\n  "generated_at": "%s"\n}\n' \
 		"$$SHA" "$$DATE" > $(PROTO_DIR)/VERSION
 
-verify:
+verify-build:
 	# 单元测试（含字段一致性校验）
 	cd $(GENERATOR_DIR) && mvn -q test \
 		$(if $(NACOS_VERSION),-Dnacos.version=$(NACOS_VERSION),)
@@ -108,6 +108,8 @@ verify:
 	cd $(GO_OUT) && go build ./...
 	# Node.js TypeScript 编译
 	cd $(NODEJS_OUT) && npx tsc --noEmit
+
+verify: verify-build
 	# 幂等性检查：重新生成 proto，不应有 diff
 	$(MAKE) generate-proto
 	git diff --exit-code -- $(PROTO_DIR)/ ':!$(PROTO_DIR)/VERSION'

@@ -39,4 +39,4 @@ jobs:
           npm install
 
       - name: Verify
-        run: make verify
+        run: make verify-build
