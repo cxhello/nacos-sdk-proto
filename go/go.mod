@@ -1,4 +1,4 @@
-module github.com/cxhello/nacos-sdk-proto
+module github.com/cxhello/nacos-sdk-proto/go
 
 go 1.24.2
 
