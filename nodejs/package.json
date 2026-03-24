@@ -2,15 +2,14 @@
   "name": "@nacos/sdk-proto",
   "version": "0.0.1-dev",
   "description": "Nacos SDK Protocol Buffers for Node.js",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/cxhello/nacos-sdk-proto"
   },
   "dependencies": {
-    "@grpc/grpc-js": "^1.9.0",
-    "google-protobuf": "^3.21.0"
+    "@grpc/grpc-js": "^1.9.0"
   }
 }
