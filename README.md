@@ -1,5 +1,7 @@
 # nacos-sdk-proto
 
+[中文](README_zh.md)
+
 Shared Protocol Buffers definitions for Nacos multi-language SDKs.
 
 This repository provides a single source of truth for all gRPC message types used in Nacos client-server communication. Multi-language SDKs (Go, Python, Node.js, etc.) can generate native code from these proto files instead of manually maintaining JSON serialization logic.
