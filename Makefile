@@ -74,16 +74,18 @@ generate-nodejs:
 
 clean:
 	# Proto（保留手写文件）
-	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' -delete
-	find $(PROTO_DIR) -type d -empty -delete
+	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' -delete 2>/dev/null || true
+	find $(PROTO_DIR) -type d -empty -delete 2>/dev/null || true
 	# Go
 	find $(GO_OUT) -name '*.pb.go' -delete
 	# Node.js
 	rm -rf $(NODEJS_OUT)/src/*
 	# Python
-	find $(PYTHON_OUT)/nacos_sdk_proto -name '*_pb2*.py' -delete
-	find $(PYTHON_OUT)/nacos_sdk_proto -name '__init__.py' -delete
-	find $(PYTHON_OUT)/nacos_sdk_proto -type d -empty -delete
+	if [ -d $(PYTHON_OUT)/nacos_sdk_proto ]; then \
+		find $(PYTHON_OUT)/nacos_sdk_proto -name '*_pb2*.py' -delete; \
+		find $(PYTHON_OUT)/nacos_sdk_proto -name '__init__.py' -delete; \
+		find $(PYTHON_OUT)/nacos_sdk_proto -type d -empty -delete; \
+	fi
 
 sync-go-mod:
 	cd $(GO_OUT) && go mod edit -module $(GO_MODULE_BASE)
