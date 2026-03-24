@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "ts-proto": "^2.11.6"
+    "ts-proto": "^2.11.6",
+    "typescript": "^6.0.2"
   }
 }
