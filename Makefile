@@ -99,7 +99,8 @@ update-version:
 
 verify:
 	# 单元测试（含字段一致性校验）
-	cd $(GENERATOR_DIR) && mvn -q test
+	cd $(GENERATOR_DIR) && mvn -q test \
+		$(if $(NACOS_VERSION),-Dnacos.version=$(NACOS_VERSION),)
 	# Go 编译
 	cd $(GO_OUT) && go build ./...
 	# Node.js TypeScript 编译
