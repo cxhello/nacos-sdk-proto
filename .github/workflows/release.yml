@@ -56,6 +56,15 @@ jobs:
       - name: Link nacos for Makefile
         run: ln -s "$GITHUB_WORKSPACE/nacos" nacos-sdk-proto/.nacos
 
+      # --- protoc ---
+      - name: Install protoc
+        run: |
+          PROTOC_VERSION=28.3
+          curl -fsSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip -o protoc.zip
+          sudo unzip -o protoc.zip -d /usr/local bin/protoc 'include/*'
+          rm protoc.zip
+          protoc --version
+
       # --- Go toolchain ---
       - uses: actions/setup-go@v5
         with:

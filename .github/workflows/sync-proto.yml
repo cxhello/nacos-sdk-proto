@@ -80,6 +80,16 @@ jobs:
         if: steps.check.outputs.needed == 'true'
         run: ln -s "$GITHUB_WORKSPACE/nacos" nacos-sdk-proto/.nacos
 
+      # --- protoc (shared by Go, Python, Node.js generation) ---
+      - name: Install protoc
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          PROTOC_VERSION=28.3
+          curl -fsSL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip -o protoc.zip
+          sudo unzip -o protoc.zip -d /usr/local bin/protoc 'include/*'
+          rm protoc.zip
+          protoc --version
+
       # --- Go toolchain (generate-go + verify) ---
       - name: Setup Go
         if: steps.check.outputs.needed == 'true'
