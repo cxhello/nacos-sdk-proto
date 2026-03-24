@@ -46,7 +46,7 @@ generate-proto:
 		  --go-module-base $(GO_MODULE_BASE)"
 
 # === 各语言代码生成 ===
-generate: generate-go generate-nodejs
+generate: generate-go generate-nodejs generate-python
 
 generate-go:
 	find $(PROTO_DIR) -name '*.proto' | xargs protoc \
@@ -55,11 +55,13 @@ generate-go:
 		--go-grpc_out=$(GO_OUT) --go-grpc_opt=paths=source_relative
 
 generate-python:
+	mkdir -p $(PYTHON_OUT)/nacos_sdk_proto
 	python -m grpc_tools.protoc \
 		--proto_path=$(PROTO_DIR) \
 		--python_out=$(PYTHON_OUT)/nacos_sdk_proto \
 		--grpc_python_out=$(PYTHON_OUT)/nacos_sdk_proto \
 		$$(find $(PROTO_DIR) -name '*.proto')
+	find $(PYTHON_OUT)/nacos_sdk_proto -type d -exec touch {}/__init__.py \;
 
 generate-nodejs:
 	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' | xargs protoc \
@@ -67,6 +69,8 @@ generate-nodejs:
 		--ts_proto_out=$(NODEJS_OUT)/src \
 		--ts_proto_opt=outputJsonMethods=true,outputEncodeMethods=false,outputClientImpl=false,exportCommonSymbols=false \
 		--proto_path=$(PROTO_DIR)
+	cd $(NODEJS_OUT)/src && find . -name '*.ts' -not -name 'index.ts' | sort | \
+		sed 's|^\./||; s|\.ts$$||; s|^|export * from "./|; s|$$|";|' > index.ts
 
 clean:
 	# Proto（保留手写文件）
