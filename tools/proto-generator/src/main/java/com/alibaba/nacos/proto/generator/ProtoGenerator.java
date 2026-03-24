@@ -62,6 +62,10 @@ public class ProtoGenerator {
     // Maps Java class to proto message name for consistent references
     private final Map<Class<?>, String> classToMessageName = new HashMap<>();
 
+    public Map<Class<?>, String> getClassToMessageName() {
+        return Collections.unmodifiableMap(classToMessageName);
+    }
+
     private MessageDescriptor buildDescriptor(Class<?> clazz, FieldNumberManager numberManager,
             Map<String, Set<String>> messageNamesByModule) {
         List<FieldInfo> fields = extractor.extract(clazz);
