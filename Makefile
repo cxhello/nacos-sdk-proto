@@ -23,7 +23,7 @@ LOCK_FILE      := $(GENERATOR_DIR)/field-numbers.json
 
 # === 一键同步（本地入口） ===
 sync:
-	@./scripts/sync.sh
+	@FORCE=$(FORCE) ./scripts/sync.sh
 
 # === 拉取 Nacos 源码 + 构建 nacos-api ===
 setup:

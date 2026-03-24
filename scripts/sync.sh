@@ -21,7 +21,7 @@ if [ -f "$PROTO_VERSION" ]; then
     LOCAL_SHA=$(jq -r .nacos_commit "$PROTO_VERSION" 2>/dev/null || echo "")
 fi
 
-if [ "$REMOTE_SHA" = "$LOCAL_SHA" ]; then
+if [ "${FORCE:-}" != "1" ] && [ "$REMOTE_SHA" = "$LOCAL_SHA" ]; then
     echo "Already up to date ($REMOTE_SHA)."
     exit 0
 fi
