@@ -81,6 +81,7 @@ jobs:
       - name: Generate and verify
         run: |
           cd nacos-sdk-proto
+          make clean
           make generate-proto
           make generate
           make verify

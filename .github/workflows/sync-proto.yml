@@ -107,6 +107,7 @@ jobs:
         if: steps.check.outputs.needed == 'true'
         run: |
           cd nacos-sdk-proto
+          make clean
           make generate-proto
           make generate
           make verify
