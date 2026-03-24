@@ -32,6 +32,21 @@ class ProtoGeneratorIntegrationTest {
         assertTrue(configReq.contains("string dataId = 2;"));
         assertTrue(configReq.contains("string tag = 5;"));
         assertTrue(configReq.contains("package nacos.config;"));
+        // Default go_package should use nacos-group base
+        assertTrue(configReq.contains("option go_package = \"github.com/nacos-group/nacos-sdk-proto-go/config\";"));
+    }
+
+    @Test
+    void testCustomGoModuleBase() throws Exception {
+        Path outputDir = tempDir.resolve("proto");
+        Path lockFile = tempDir.resolve("field-numbers.json");
+
+        ProtoGenerator generator = new ProtoGenerator();
+        generator.writer.setGoModuleBase("github.com/cxhello/nacos-sdk-proto/go");
+        generator.generate(outputDir, lockFile, false);
+
+        String configReq = Files.readString(outputDir.resolve("config/config_request.proto"));
+        assertTrue(configReq.contains("option go_package = \"github.com/cxhello/nacos-sdk-proto/go/config\";"));
     }
 
     @Test

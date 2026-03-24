@@ -15,7 +15,7 @@ public class ProtoGenerator {
     private final FieldExtractor extractor = new FieldExtractor();
     private final TypeMapper typeMapper = new TypeMapper();
     private final ModuleClassifier classifier = new ModuleClassifier();
-    private final ProtoFileWriter writer = new ProtoFileWriter();
+    final ProtoFileWriter writer = new ProtoFileWriter();
 
     public void generate(Path outputDir, Path lockFilePath, boolean dryRun) throws IOException {
         FieldNumberManager numberManager = new FieldNumberManager(lockFilePath);
@@ -142,6 +142,7 @@ public class ProtoGenerator {
         Path lockFile = null;
         boolean dryRun = false;
         boolean verify = false;
+        String goModuleBase = null;
 
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
@@ -149,15 +150,19 @@ public class ProtoGenerator {
                 case "--lockfile" -> lockFile = Path.of(args[++i]);
                 case "--dry-run" -> dryRun = true;
                 case "--verify" -> verify = true;
+                case "--go-module-base" -> goModuleBase = args[++i];
             }
         }
 
         if (outputDir == null || lockFile == null) {
-            System.err.println("Usage: --output <dir> --lockfile <file> [--dry-run] [--verify]");
+            System.err.println("Usage: --output <dir> --lockfile <file> [--dry-run] [--verify] [--go-module-base <base>]");
             System.exit(1);
         }
 
         ProtoGenerator generator = new ProtoGenerator();
+        if (goModuleBase != null) {
+            generator.writer.setGoModuleBase(goModuleBase);
+        }
         generator.generate(outputDir, lockFile, dryRun);
 
         if (verify) {

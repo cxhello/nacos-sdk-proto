@@ -18,13 +18,11 @@ public class ProtoFileWriter {
         "ai", "nacos.ai"
     );
 
-    private static final Map<String, String> MODULE_GO_PACKAGES = Map.of(
-        "common", "github.com/nacos-group/nacos-sdk-proto-go/common",
-        "config", "github.com/nacos-group/nacos-sdk-proto-go/config",
-        "naming", "github.com/nacos-group/nacos-sdk-proto-go/naming",
-        "lock", "github.com/nacos-group/nacos-sdk-proto-go/lock",
-        "ai", "github.com/nacos-group/nacos-sdk-proto-go/ai"
-    );
+    private String goModuleBase = "github.com/nacos-group/nacos-sdk-proto-go";
+
+    public void setGoModuleBase(String goModuleBase) {
+        this.goModuleBase = goModuleBase;
+    }
 
     private final TypeMapper typeMapper = new TypeMapper();
 
@@ -55,7 +53,7 @@ public class ProtoFileWriter {
             sb.append("syntax = \"proto3\";\n");
             sb.append("package ").append(MODULE_PACKAGES.getOrDefault(module, "nacos." + module)).append(";\n\n");
             sb.append("option go_package = \"")
-              .append(MODULE_GO_PACKAGES.getOrDefault(module, "github.com/nacos-group/nacos-sdk-proto-go/" + module))
+              .append(goModuleBase).append("/").append(module)
               .append("\";\n");
 
             Set<String> imports = collectImports(messages, filePath, messageToFile);
