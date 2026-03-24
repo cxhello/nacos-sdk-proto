@@ -1,0 +1,1173 @@
+{
+  "version" : 1,
+  "messages" : {
+    "AgentEndpointRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "agentName" : 3,
+        "endpoint" : 4,
+        "type" : 5
+      },
+      "reserved" : [ ]
+    },
+    "AgentEndpoint" : {
+      "fields" : {
+        "transport" : 1,
+        "address" : 2,
+        "port" : 3,
+        "path" : 4,
+        "supportTls" : 5,
+        "version" : 6,
+        "protocol" : 7,
+        "query" : 8
+      },
+      "reserved" : [ ]
+    },
+    "AgentEndpointResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "type" : 5
+      },
+      "reserved" : [ ]
+    },
+    "BatchAgentEndpointRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "agentName" : 3,
+        "endpoints" : 4
+      },
+      "reserved" : [ ]
+    },
+    "BatchInstanceRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "type" : 5,
+        "instances" : 6
+      },
+      "reserved" : [ ]
+    },
+    "Instance" : {
+      "fields" : {
+        "instanceId" : 1,
+        "ip" : 2,
+        "port" : 3,
+        "weight" : 4,
+        "healthy" : 5,
+        "enabled" : 6,
+        "ephemeral" : 7,
+        "clusterName" : 8,
+        "serviceName" : 9,
+        "metadata" : 10
+      },
+      "reserved" : [ ]
+    },
+    "BatchInstanceResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "type" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ClientConfigMetricRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "metricsKeys" : 2
+      },
+      "reserved" : [ ]
+    },
+    "MetricsKey" : {
+      "fields" : {
+        "type" : 1,
+        "key" : 2
+      },
+      "reserved" : [ ]
+    },
+    "ClientConfigMetricResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "metrics" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ClientDetectionRequest" : {
+      "fields" : {
+        "requestId" : 1
+      },
+      "reserved" : [ ]
+    },
+    "ClientDetectionResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigBatchListenRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "dataId" : 2,
+        "group" : 3,
+        "tenant" : 4,
+        "listen" : 5,
+        "configListenContexts" : 6
+      },
+      "reserved" : [ ]
+    },
+    "ConfigListenContext" : {
+      "fields" : {
+        "group" : 1,
+        "md5" : 2,
+        "dataId" : 3,
+        "tenant" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigChangeBatchListenResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "changedConfigs" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ConfigContext" : {
+      "fields" : {
+        "group" : 1,
+        "dataId" : 2,
+        "tenant" : 3
+      },
+      "reserved" : [ ]
+    },
+    "ConfigChangeClusterSyncRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "dataId" : 2,
+        "group" : 3,
+        "tenant" : 4,
+        "lastModified" : 5,
+        "grayName" : 6,
+        "isBeta" : 7,
+        "tag" : 8
+      },
+      "reserved" : [ ]
+    },
+    "ConfigChangeClusterSyncResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigChangeNotifyRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "dataId" : 2,
+        "group" : 3,
+        "tenant" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigChangeNotifyResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigFuzzyWatchChangeNotifyRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "groupKey" : 2,
+        "changeType" : 3
+      },
+      "reserved" : [ ]
+    },
+    "ConfigFuzzyWatchChangeNotifyResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigFuzzyWatchRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "groupKeyPattern" : 2,
+        "receivedGroupKeys" : 3,
+        "watchType" : 4,
+        "isInitializing" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ConfigFuzzyWatchResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigFuzzyWatchSyncRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "groupKeyPattern" : 2,
+        "contexts" : 3,
+        "syncType" : 4,
+        "totalBatch" : 5,
+        "currentBatch" : 6
+      },
+      "reserved" : [ ]
+    },
+    "Context" : {
+      "fields" : {
+        "changedType" : 2,
+        "serviceKey" : 3
+      },
+      "reserved" : [ 1 ]
+    },
+    "ConfigFuzzyWatchSyncResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigPublishRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "dataId" : 2,
+        "group" : 3,
+        "tenant" : 4,
+        "content" : 5,
+        "casMd5" : 6,
+        "additionMap" : 7
+      },
+      "reserved" : [ ]
+    },
+    "ConfigPublishResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigQueryRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "dataId" : 2,
+        "group" : 3,
+        "tenant" : 4,
+        "tag" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ConfigQueryResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "content" : 5,
+        "encryptedDataKey" : 6,
+        "contentType" : 7,
+        "md5" : 8,
+        "lastModified" : 9,
+        "isBeta" : 10,
+        "tag" : 11
+      },
+      "reserved" : [ ]
+    },
+    "ConfigRemoveRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "dataId" : 2,
+        "group" : 3,
+        "tenant" : 4,
+        "tag" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ConfigRemoveResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConnectResetRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "serverIp" : 2,
+        "serverPort" : 3,
+        "connectionId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConnectResetResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConnectionSetupRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "clientVersion" : 2,
+        "tenant" : 3,
+        "labels" : 4,
+        "abilityTable" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ErrorResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "HealthCheckRequest" : {
+      "fields" : {
+        "requestId" : 1
+      },
+      "reserved" : [ ]
+    },
+    "HealthCheckResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "InstanceRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "type" : 5,
+        "instance" : 6
+      },
+      "reserved" : [ ]
+    },
+    "InstanceResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "type" : 5
+      },
+      "reserved" : [ ]
+    },
+    "LockOperationRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "lockInstance" : 2,
+        "lockOperationEnum" : 3
+      },
+      "reserved" : [ ]
+    },
+    "LockInstance" : {
+      "fields" : {
+        "key" : 1,
+        "expiredTime" : 2,
+        "params" : 3,
+        "lockType" : 4
+      },
+      "reserved" : [ ]
+    },
+    "LockOperationResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "result" : 5
+      },
+      "reserved" : [ ]
+    },
+    "McpServerEndpointRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "mcpId" : 3,
+        "mcpName" : 4,
+        "address" : 5,
+        "port" : 6,
+        "version" : 7,
+        "type" : 8
+      },
+      "reserved" : [ ]
+    },
+    "McpServerEndpointResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "type" : 5
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchChangeNotifyRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "syncType" : 2,
+        "serviceKey" : 3,
+        "changedType" : 4
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchChangeNotifyResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "isInitializing" : 2,
+        "namespace" : 3,
+        "groupKeyPattern" : 4,
+        "receivedGroupKeys" : 5,
+        "watchType" : 6
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchSyncRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "syncType" : 2,
+        "groupKeyPattern" : 3,
+        "contexts" : 4,
+        "totalBatch" : 5,
+        "currentBatch" : 6
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchSyncResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "NotifySubscriberRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "serviceInfo" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ServiceInfo" : {
+      "fields" : {
+        "name" : 1,
+        "groupName" : 2,
+        "clusters" : 3,
+        "cacheMillis" : 4,
+        "hosts" : 5,
+        "lastRefTime" : 6,
+        "checksum" : 7,
+        "allIps" : 8,
+        "reachProtectionThreshold" : 9
+      },
+      "reserved" : [ ]
+    },
+    "NotifySubscriberResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "PersistentInstanceRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "type" : 5,
+        "instance" : 6
+      },
+      "reserved" : [ ]
+    },
+    "PushAckRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "success" : 2,
+        "exception" : 3
+      },
+      "reserved" : [ ]
+    },
+    "QueryAgentCardRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "agentName" : 3,
+        "version" : 4,
+        "registrationType" : 5
+      },
+      "reserved" : [ ]
+    },
+    "QueryAgentCardResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "agentCardDetailInfo" : 5
+      },
+      "reserved" : [ ]
+    },
+    "AgentCardDetailInfo" : {
+      "fields" : {
+        "protocolVersion" : 1,
+        "name" : 2,
+        "description" : 3,
+        "version" : 4,
+        "iconUrl" : 5,
+        "capabilities" : 6,
+        "skills" : 7,
+        "url" : 8,
+        "preferredTransport" : 9,
+        "additionalInterfaces" : 10,
+        "provider" : 11,
+        "documentationUrl" : 12,
+        "securitySchemes" : 13,
+        "security" : 14,
+        "defaultInputModes" : 15,
+        "defaultOutputModes" : 16,
+        "supportsAuthenticatedExtendedCard" : 17,
+        "registrationType" : 18,
+        "latestVersion" : 19
+      },
+      "reserved" : [ ]
+    },
+    "AgentCapabilities" : {
+      "fields" : {
+        "streaming" : 1,
+        "pushNotifications" : 2,
+        "stateTransitionHistory" : 3,
+        "extensions" : 4
+      },
+      "reserved" : [ ]
+    },
+    "AgentExtension" : {
+      "fields" : {
+        "uri" : 1,
+        "description" : 2,
+        "required" : 3,
+        "params" : 4
+      },
+      "reserved" : [ ]
+    },
+    "AgentSkill" : {
+      "fields" : {
+        "id" : 1,
+        "name" : 2,
+        "description" : 3,
+        "tags" : 4,
+        "examples" : 5,
+        "inputModes" : 6,
+        "outputModes" : 7
+      },
+      "reserved" : [ ]
+    },
+    "AgentInterface" : {
+      "fields" : {
+        "url" : 1,
+        "transport" : 2
+      },
+      "reserved" : [ ]
+    },
+    "AgentProvider" : {
+      "fields" : {
+        "organization" : 1,
+        "url" : 2
+      },
+      "reserved" : [ ]
+    },
+    "SecurityScheme" : {
+      "fields" : {
+        "threshold" : 1,
+        "loadFactor" : 2
+      },
+      "reserved" : [ ]
+    },
+    "QueryMcpServerRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "mcpId" : 3,
+        "mcpName" : 4,
+        "version" : 5
+      },
+      "reserved" : [ ]
+    },
+    "QueryMcpServerResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "mcpServerDetailInfo" : 5
+      },
+      "reserved" : [ ]
+    },
+    "McpServerDetailInfo" : {
+      "fields" : {
+        "namespaceId" : 1,
+        "id" : 2,
+        "name" : 3,
+        "protocol" : 4,
+        "frontProtocol" : 5,
+        "description" : 6,
+        "repository" : 7,
+        "packages" : 8,
+        "icons" : 9,
+        "websiteUrl" : 10,
+        "versionDetail" : 11,
+        "version" : 12,
+        "remoteServerConfig" : 13,
+        "localServerConfig" : 14,
+        "enabled" : 15,
+        "status" : 16,
+        "capabilities" : 17,
+        "backendEndpoints" : 18,
+        "frontendEndpoints" : 19,
+        "toolSpec" : 20,
+        "allVersions" : 21
+      },
+      "reserved" : [ ]
+    },
+    "Repository" : {
+      "fields" : {
+        "url" : 1,
+        "source" : 2,
+        "id" : 3,
+        "subfolder" : 4
+      },
+      "reserved" : [ ]
+    },
+    "Package" : {
+      "fields" : {
+        "registryType" : 1,
+        "registryBaseUrl" : 2,
+        "identifier" : 3,
+        "version" : 4,
+        "fileSha256" : 5,
+        "runtimeHint" : 6,
+        "runtimeArguments" : 7,
+        "packageArguments" : 8,
+        "environmentVariables" : 9,
+        "transport" : 10
+      },
+      "reserved" : [ ]
+    },
+    "Argument" : {
+      "fields" : { },
+      "reserved" : [ ]
+    },
+    "KeyValueInput" : {
+      "fields" : {
+        "description" : 1,
+        "isRequired" : 2,
+        "format" : 3,
+        "value" : 4,
+        "isSecret" : 5,
+        "defaultValue" : 6,
+        "choices" : 7,
+        "placeholder" : 8,
+        "variables" : 9,
+        "name" : 10
+      },
+      "reserved" : [ ]
+    },
+    "Input" : {
+      "fields" : {
+        "description" : 1,
+        "isRequired" : 2,
+        "format" : 3,
+        "value" : 4,
+        "isSecret" : 5,
+        "defaultValue" : 6,
+        "choices" : 7,
+        "placeholder" : 8
+      },
+      "reserved" : [ ]
+    },
+    "Icon" : {
+      "fields" : {
+        "src" : 1,
+        "mimeType" : 2,
+        "sizes" : 3,
+        "theme" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ServerVersionDetail" : {
+      "fields" : {
+        "version" : 1,
+        "release_date" : 2,
+        "is_latest" : 3
+      },
+      "reserved" : [ ]
+    },
+    "McpServerRemoteServiceConfig" : {
+      "fields" : {
+        "serviceRef" : 1,
+        "exportPath" : 2,
+        "frontEndpointConfigList" : 3
+      },
+      "reserved" : [ ]
+    },
+    "McpServiceRef" : {
+      "fields" : {
+        "namespaceId" : 1,
+        "groupName" : 2,
+        "serviceName" : 3,
+        "transportProtocol" : 4
+      },
+      "reserved" : [ ]
+    },
+    "FrontEndpointConfig" : {
+      "fields" : {
+        "type" : 1,
+        "protocol" : 2,
+        "endpointType" : 3,
+        "endpointData" : 4,
+        "path" : 5
+      },
+      "reserved" : [ ]
+    },
+    "McpEndpointInfo" : {
+      "fields" : {
+        "protocol" : 1,
+        "address" : 2,
+        "port" : 3,
+        "path" : 4
+      },
+      "reserved" : [ ]
+    },
+    "McpToolSpecification" : {
+      "fields" : {
+        "specificationType" : 1,
+        "encryptData" : 2,
+        "tools" : 3,
+        "toolsMeta" : 4,
+        "securitySchemes" : 5,
+        "extensions" : 6
+      },
+      "reserved" : [ ]
+    },
+    "EncryptObject" : {
+      "fields" : {
+        "data" : 1,
+        "encryptInfo" : 2
+      },
+      "reserved" : [ ]
+    },
+    "McpTool" : {
+      "fields" : {
+        "name" : 1,
+        "description" : 2,
+        "inputSchema" : 3,
+        "outputSchema" : 4,
+        "meta" : 5,
+        "annotations" : 6
+      },
+      "reserved" : [ ]
+    },
+    "McpToolAnnotations" : {
+      "fields" : {
+        "title" : 1,
+        "readOnlyHint" : 2,
+        "destructiveHint" : 3,
+        "idempotentHint" : 4,
+        "openWorldHint" : 5
+      },
+      "reserved" : [ ]
+    },
+    "McpToolMeta" : {
+      "fields" : {
+        "invokeContext" : 1,
+        "enabled" : 2,
+        "templates" : 3
+      },
+      "reserved" : [ ]
+    },
+    "McpSecurityScheme" : {
+      "fields" : {
+        "id" : 1,
+        "type" : 2,
+        "scheme" : 3,
+        "in" : 4,
+        "name" : 5,
+        "defaultCredential" : 6
+      },
+      "reserved" : [ ]
+    },
+    "QueryPromptRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "promptKey" : 3,
+        "version" : 4,
+        "label" : 5,
+        "md5" : 6
+      },
+      "reserved" : [ ]
+    },
+    "QueryPromptResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "promptInfo" : 5
+      },
+      "reserved" : [ ]
+    },
+    "Prompt" : {
+      "fields" : {
+        "promptKey" : 1,
+        "version" : 2,
+        "template" : 3,
+        "md5" : 4,
+        "variables" : 5
+      },
+      "reserved" : [ ]
+    },
+    "PromptVariable" : {
+      "fields" : {
+        "name" : 1,
+        "defaultValue" : 2,
+        "description" : 3
+      },
+      "reserved" : [ ]
+    },
+    "QueryServiceResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "serviceInfo" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ReleaseAgentCardRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "agentName" : 3,
+        "agentCard" : 4,
+        "registrationType" : 5,
+        "setAsLatest" : 6
+      },
+      "reserved" : [ ]
+    },
+    "AgentCard" : {
+      "fields" : {
+        "protocolVersion" : 1,
+        "name" : 2,
+        "description" : 3,
+        "version" : 4,
+        "iconUrl" : 5,
+        "capabilities" : 6,
+        "skills" : 7,
+        "url" : 8,
+        "preferredTransport" : 9,
+        "additionalInterfaces" : 10,
+        "provider" : 11,
+        "documentationUrl" : 12,
+        "securitySchemes" : 13,
+        "security" : 14,
+        "defaultInputModes" : 15,
+        "defaultOutputModes" : 16,
+        "supportsAuthenticatedExtendedCard" : 17
+      },
+      "reserved" : [ ]
+    },
+    "ReleaseAgentCardResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ReleaseMcpServerRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespaceId" : 2,
+        "mcpId" : 3,
+        "mcpName" : 4,
+        "serverSpecification" : 5,
+        "toolSpecification" : 6,
+        "endpointSpecification" : 7
+      },
+      "reserved" : [ ]
+    },
+    "McpServerBasicInfo" : {
+      "fields" : {
+        "namespaceId" : 1,
+        "id" : 2,
+        "name" : 3,
+        "protocol" : 4,
+        "frontProtocol" : 5,
+        "description" : 6,
+        "repository" : 7,
+        "packages" : 8,
+        "icons" : 9,
+        "websiteUrl" : 10,
+        "versionDetail" : 11,
+        "version" : 12,
+        "remoteServerConfig" : 13,
+        "localServerConfig" : 14,
+        "enabled" : 15,
+        "status" : 16,
+        "capabilities" : 17
+      },
+      "reserved" : [ ]
+    },
+    "McpEndpointSpec" : {
+      "fields" : {
+        "type" : 1,
+        "data" : 2
+      },
+      "reserved" : [ ]
+    },
+    "ReleaseMcpServerResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "mcpId" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ServerCheckRequest" : {
+      "fields" : {
+        "requestId" : 1
+      },
+      "reserved" : [ ]
+    },
+    "ServerCheckResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "connectionId" : 5,
+        "supportAbilityNegotiation" : 6
+      },
+      "reserved" : [ ]
+    },
+    "ServerLoaderInfoRequest" : {
+      "fields" : {
+        "requestId" : 1
+      },
+      "reserved" : [ ]
+    },
+    "ServerLoaderInfoResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "address" : 5,
+        "loaderMetrics" : 6
+      },
+      "reserved" : [ ]
+    },
+    "ServerReloadRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "reloadCount" : 2,
+        "reloadServer" : 3
+      },
+      "reserved" : [ ]
+    },
+    "ServerReloadResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ServiceListRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "pageNo" : 5,
+        "pageSize" : 6,
+        "selector" : 7
+      },
+      "reserved" : [ ]
+    },
+    "ServiceListResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "count" : 5,
+        "serviceNames" : 6
+      },
+      "reserved" : [ ]
+    },
+    "ServiceQueryRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "cluster" : 5,
+        "healthyOnly" : 6,
+        "udpPort" : 7
+      },
+      "reserved" : [ ]
+    },
+    "SetupAckRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "abilityTable" : 2
+      },
+      "reserved" : [ ]
+    },
+    "SetupAckResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4
+      },
+      "reserved" : [ ]
+    },
+    "SubscribeServiceRequest" : {
+      "fields" : {
+        "requestId" : 1,
+        "namespace" : 2,
+        "serviceName" : 3,
+        "groupName" : 4,
+        "subscribe" : 5,
+        "clusters" : 6
+      },
+      "reserved" : [ ]
+    },
+    "SubscribeServiceResponse" : {
+      "fields" : {
+        "resultCode" : 1,
+        "errorCode" : 2,
+        "message" : 3,
+        "requestId" : 4,
+        "serviceInfo" : 5
+      },
+      "reserved" : [ ]
+    },
+    "ClientConfigMetricRequestMetricsKey" : {
+      "fields" : {
+        "type" : 1,
+        "key" : 2
+      },
+      "reserved" : [ ]
+    },
+    "ConfigBatchListenRequestConfigListenContext" : {
+      "fields" : {
+        "group" : 1,
+        "md5" : 2,
+        "dataId" : 3,
+        "tenant" : 4
+      },
+      "reserved" : [ ]
+    },
+    "ConfigChangeBatchListenResponseConfigContext" : {
+      "fields" : {
+        "group" : 1,
+        "dataId" : 2,
+        "tenant" : 3
+      },
+      "reserved" : [ ]
+    },
+    "ConfigFuzzyWatchSyncRequestContext" : {
+      "fields" : {
+        "groupKey" : 1,
+        "changedType" : 2
+      },
+      "reserved" : [ ]
+    },
+    "NamingFuzzyWatchSyncRequestContext" : {
+      "fields" : {
+        "serviceKey" : 1,
+        "changedType" : 2
+      },
+      "reserved" : [ ]
+    }
+  }
+}

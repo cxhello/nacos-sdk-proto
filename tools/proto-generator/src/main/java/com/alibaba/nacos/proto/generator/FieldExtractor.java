@@ -57,9 +57,12 @@ public class FieldExtractor {
         if (Response.class.isAssignableFrom(clazz)) {
             baseFieldNames = RESPONSE_BASE_FIELDS;
             baseClass = Response.class;
-        } else {
+        } else if (Request.class.isAssignableFrom(clazz)) {
             baseFieldNames = REQUEST_BASE_FIELDS;
             baseClass = Request.class;
+        } else {
+            // Domain objects (not Request/Response subclasses) have no base fields
+            return;
         }
 
         for (String name : baseFieldNames) {

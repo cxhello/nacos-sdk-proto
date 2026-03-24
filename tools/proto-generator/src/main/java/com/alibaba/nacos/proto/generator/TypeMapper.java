@@ -9,6 +9,12 @@ import java.util.Map;
 
 public class TypeMapper {
 
+    private Map<Class<?>, String> classToMessageName;
+
+    public void setClassToMessageName(Map<Class<?>, String> classToMessageName) {
+        this.classToMessageName = classToMessageName;
+    }
+
     public String mapType(Class<?> javaType, Type genericType) {
         if (javaType == String.class) return "string";
         if (javaType == int.class || javaType == Integer.class) return "int32";
@@ -17,21 +23,37 @@ public class TypeMapper {
         if (javaType == double.class || javaType == Double.class) return "double";
         if (javaType == float.class || javaType == Float.class) return "float";
         if (javaType.isEnum()) return "string";
+        if (Throwable.class.isAssignableFrom(javaType)) return "string";
         if (javaType == Object.class || javaType == Serializable.class) {
             return "google.protobuf.Value";
         }
 
         if (Map.class.isAssignableFrom(javaType) && genericType instanceof ParameterizedType pt) {
-            String keyType = resolveTypeArg(pt.getActualTypeArguments()[0]);
-            String valType = resolveTypeArg(pt.getActualTypeArguments()[1]);
+            Type keyArg = pt.getActualTypeArguments()[0];
+            Type valArg = pt.getActualTypeArguments()[1];
+            String keyType = resolveTypeArg(keyArg);
+            String valType = resolveTypeArg(valArg);
+            // proto3 map values cannot be repeated/map — fall back to Value
+            if (valType.startsWith("repeated ") || valType.startsWith("map<")) {
+                return "map<" + keyType + ", google.protobuf.Value>";
+            }
             return "map<" + keyType + ", " + valType + ">";
         }
 
         if (Collection.class.isAssignableFrom(javaType) && genericType instanceof ParameterizedType pt) {
-            String elemType = resolveTypeArg(pt.getActualTypeArguments()[0]);
+            Type elemArg = pt.getActualTypeArguments()[0];
+            String elemType = resolveTypeArg(elemArg);
+            // proto3 does not allow repeated map — fall back to Value
+            if (elemType.startsWith("map<")) {
+                return "repeated google.protobuf.Value";
+            }
             return "repeated " + elemType;
         }
 
+        // Use registered message name if available (handles name collisions)
+        if (classToMessageName != null && classToMessageName.containsKey(javaType)) {
+            return classToMessageName.get(javaType);
+        }
         return javaType.getSimpleName();
     }
 

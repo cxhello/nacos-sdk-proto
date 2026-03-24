@@ -1,6 +1,8 @@
 package com.alibaba.nacos.proto.generator;
 
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -26,7 +28,19 @@ public class ProtoFileWriter {
 
     private final TypeMapper typeMapper = new TypeMapper();
 
+    public void setClassToMessageName(Map<Class<?>, String> classToMessageName) {
+        typeMapper.setClassToMessageName(classToMessageName);
+    }
+
     public void write(Path outputDir, Map<String, List<MessageDescriptor>> messagesByFile) throws IOException {
+        // Build global map: message name -> file path
+        Map<String, String> messageToFile = new HashMap<>();
+        for (var entry : messagesByFile.entrySet()) {
+            for (MessageDescriptor msg : entry.getValue()) {
+                messageToFile.put(msg.name(), entry.getKey());
+            }
+        }
+
         for (var entry : messagesByFile.entrySet()) {
             String filePath = entry.getKey();
             List<MessageDescriptor> messages = entry.getValue();
@@ -44,7 +58,7 @@ public class ProtoFileWriter {
               .append(MODULE_GO_PACKAGES.getOrDefault(module, "github.com/nacos-group/nacos-sdk-proto-go/" + module))
               .append("\";\n");
 
-            Set<String> imports = collectImports(messages, module);
+            Set<String> imports = collectImports(messages, filePath, messageToFile);
             if (!imports.isEmpty()) {
                 sb.append("\n");
                 for (String imp : imports) {
@@ -78,16 +92,57 @@ public class ProtoFileWriter {
         }
     }
 
-    private Set<String> collectImports(List<MessageDescriptor> messages, String currentModule) {
+    private Set<String> collectImports(List<MessageDescriptor> messages, String currentFilePath,
+            Map<String, String> messageToFile) {
         Set<String> imports = new TreeSet<>();
+        // Collect message names defined in this file
+        Set<String> localMessages = messages.stream()
+            .map(MessageDescriptor::name)
+            .collect(Collectors.toSet());
+
         for (MessageDescriptor msg : messages) {
             for (FieldInfo field : msg.fields()) {
                 String protoType = typeMapper.mapType(field.type(), field.genericType());
                 if (protoType.contains("google.protobuf.Value")) {
                     imports.add("google/protobuf/struct.proto");
                 }
+
+                // Check for cross-file message references
+                Set<String> referencedTypes = extractReferencedTypes(field);
+                for (String refType : referencedTypes) {
+                    if (!localMessages.contains(refType) && messageToFile.containsKey(refType)) {
+                        String refFile = messageToFile.get(refType);
+                        if (!refFile.equals(currentFilePath)) {
+                            imports.add(refFile);
+                        }
+                    }
+                }
             }
         }
         return imports;
+    }
+
+    private Set<String> extractReferencedTypes(FieldInfo field) {
+        Set<String> types = new HashSet<>();
+        Class<?> fieldType = field.type();
+        Type genericType = field.genericType();
+
+        if (Collection.class.isAssignableFrom(fieldType) && genericType instanceof ParameterizedType pt) {
+            Type elemType = pt.getActualTypeArguments()[0];
+            if (elemType instanceof Class<?> cls && !cls.isPrimitive() && !cls.getName().startsWith("java.")) {
+                types.add(cls.getSimpleName());
+            }
+        } else if (Map.class.isAssignableFrom(fieldType) && genericType instanceof ParameterizedType pt) {
+            for (Type arg : pt.getActualTypeArguments()) {
+                if (arg instanceof Class<?> cls && !cls.isPrimitive() && !cls.getName().startsWith("java.")) {
+                    types.add(cls.getSimpleName());
+                }
+            }
+        } else if (!fieldType.isPrimitive() && !fieldType.getName().startsWith("java.")
+                   && !fieldType.isEnum() && fieldType != Object.class
+                   && !java.io.Serializable.class.equals(fieldType)) {
+            types.add(fieldType.getSimpleName());
+        }
+        return types;
     }
 }

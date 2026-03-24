@@ -86,7 +86,9 @@ public class FieldNumberManager {
         wrapper.put("version", 1);
         wrapper.put("messages", data);
         ObjectMapper om = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        Files.createDirectories(lockFilePath.getParent());
+        if (lockFilePath.getParent() != null) {
+            Files.createDirectories(lockFilePath.getParent());
+        }
         om.writeValue(lockFilePath.toFile(), wrapper);
     }
 }
