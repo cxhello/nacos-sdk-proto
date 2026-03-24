@@ -23,6 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: nacos-sdk-proto
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Resolve nacos ref
         id: resolve
@@ -150,7 +151,7 @@ jobs:
       - name: Check diff and create PR
         if: steps.check.outputs.needed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           cd nacos-sdk-proto
           if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
