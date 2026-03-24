@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProtoGeneratorIntegrationTest {
 
+    private static final String TEST_GO_MODULE_BASE = "github.com/test-owner/nacos-sdk-proto/go";
+
     @TempDir
     Path tempDir;
 
@@ -16,6 +18,7 @@ class ProtoGeneratorIntegrationTest {
         Path lockFile = tempDir.resolve("field-numbers.json");
 
         ProtoGenerator generator = new ProtoGenerator();
+        generator.writer.setGoModuleBase(TEST_GO_MODULE_BASE);
         generator.generate(outputDir, lockFile, false);
 
         assertTrue(Files.exists(outputDir.resolve("common/common.proto")));
@@ -32,21 +35,17 @@ class ProtoGeneratorIntegrationTest {
         assertTrue(configReq.contains("string dataId = 2;"));
         assertTrue(configReq.contains("string tag = 5;"));
         assertTrue(configReq.contains("package nacos.config;"));
-        // Default go_package should use nacos-group base
-        assertTrue(configReq.contains("option go_package = \"github.com/nacos-group/nacos-sdk-proto-go/config\";"));
+        assertTrue(configReq.contains("option go_package = \"" + TEST_GO_MODULE_BASE + "/config\";"));
     }
 
     @Test
-    void testCustomGoModuleBase() throws Exception {
+    void testGoModuleBaseRequired() {
         Path outputDir = tempDir.resolve("proto");
         Path lockFile = tempDir.resolve("field-numbers.json");
 
         ProtoGenerator generator = new ProtoGenerator();
-        generator.writer.setGoModuleBase("github.com/cxhello/nacos-sdk-proto/go");
-        generator.generate(outputDir, lockFile, false);
-
-        String configReq = Files.readString(outputDir.resolve("config/config_request.proto"));
-        assertTrue(configReq.contains("option go_package = \"github.com/cxhello/nacos-sdk-proto/go/config\";"));
+        // goModuleBase not set — should fail
+        assertThrows(IllegalStateException.class, () -> generator.generate(outputDir, lockFile, false));
     }
 
     @Test
@@ -67,6 +66,7 @@ class ProtoGeneratorIntegrationTest {
         Path lockFile = tempDir.resolve("field-numbers.json");
 
         ProtoGenerator generator = new ProtoGenerator();
+        generator.writer.setGoModuleBase(TEST_GO_MODULE_BASE);
         generator.generate(outputDir, lockFile, false);
         String firstRun = Files.readString(outputDir.resolve("config/config_request.proto"));
 

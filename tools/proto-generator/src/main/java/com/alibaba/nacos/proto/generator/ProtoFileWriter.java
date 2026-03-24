@@ -18,7 +18,7 @@ public class ProtoFileWriter {
         "ai", "nacos.ai"
     );
 
-    private String goModuleBase = "github.com/nacos-group/nacos-sdk-proto-go";
+    private String goModuleBase;
 
     public void setGoModuleBase(String goModuleBase) {
         this.goModuleBase = goModuleBase;
@@ -31,6 +31,9 @@ public class ProtoFileWriter {
     }
 
     public void write(Path outputDir, Map<String, List<MessageDescriptor>> messagesByFile) throws IOException {
+        if (goModuleBase == null || goModuleBase.isEmpty()) {
+            throw new IllegalStateException("goModuleBase must be set before writing proto files. Use --go-module-base CLI arg.");
+        }
         // Build global map: message name -> file path
         Map<String, String> messageToFile = new HashMap<>();
         for (var entry : messagesByFile.entrySet()) {

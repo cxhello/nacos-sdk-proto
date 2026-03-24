@@ -154,15 +154,13 @@ public class ProtoGenerator {
             }
         }
 
-        if (outputDir == null || lockFile == null) {
-            System.err.println("Usage: --output <dir> --lockfile <file> [--dry-run] [--verify] [--go-module-base <base>]");
+        if (outputDir == null || lockFile == null || goModuleBase == null) {
+            System.err.println("Usage: --output <dir> --lockfile <file> --go-module-base <base> [--dry-run] [--verify]");
             System.exit(1);
         }
 
         ProtoGenerator generator = new ProtoGenerator();
-        if (goModuleBase != null) {
-            generator.writer.setGoModuleBase(goModuleBase);
-        }
+        generator.writer.setGoModuleBase(goModuleBase);
         generator.generate(outputDir, lockFile, dryRun);
 
         if (verify) {
