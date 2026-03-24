@@ -67,12 +67,15 @@ jobs:
       - name: Build nacos-api
         run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
 
+      - name: Link nacos for Makefile
+        run: ln -s "$GITHUB_WORKSPACE/nacos" nacos-sdk-proto/.nacos
+
       - name: Generate and verify
         run: |
           cd nacos-sdk-proto
           make generate-proto
           make generate
-          cd go && go build ./...
+          make verify
 
       - name: Update VERSION
         run: |
