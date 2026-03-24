@@ -24,9 +24,10 @@ nacos-sdk-proto/
 ├── python/                         # Python 包骨架
 │   ├── pyproject.toml
 │   └── nacos_sdk_proto/
-├── nodejs/                         # Node.js 包骨架
+├── nodejs/                         # 生成的 Node.js/TypeScript 代码（ts-proto）
 │   ├── package.json
-│   └── tsconfig.json
+│   ├── tsconfig.json
+│   └── src/                        # ts-proto 生成的 .ts 文件
 ├── tools/proto-generator/          # 基于 Java 反射的 proto 生成器
 ├── docs/
 │   └── type-registry.json          # metadata.type 值注册表
@@ -56,37 +57,31 @@ nacos-sdk-proto/
 ### 前置依赖
 
 - Java 17+ 和 Maven（用于 proto-generator）
-- `protoc`、`protoc-gen-go`、`protoc-gen-go-grpc`
-- 本地安装 Nacos `api` 模块（`mvn install -pl api -am -DskipTests`）
+- Go 1.20+，安装 `protoc-gen-go`、`protoc-gen-go-grpc`
+- Node.js 20+ 和 npm（用于 ts-proto）
+- `protoc`（Protocol Buffers 编译器）
 
 ```bash
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+npm install   # 安装根目录 ts-proto
 ```
 
-### 从 Nacos 源码生成 Proto 文件
+### 一键同步（推荐）
 
 ```bash
-make generate-proto
+make sync    # clone nacos → build api → 生成全部 → 验证
 ```
 
-### 生成各语言代码
+自动 clone Nacos develop 最新代码，构建 nacos-api，生成 proto + Go + Node.js 代码，并验证编译。如果已是最新则秒级跳过。
+
+### 手动步骤
 
 ```bash
-# Go（默认）
-make generate
-
-# Python（需要 grpcio-tools）
-make generate-python
-
-# Node.js（需要 protoc-gen-ts）
-make generate-nodejs
-```
-
-### 完整流水线
-
-```bash
-make verify    # generate-proto → generate → go build
+make generate-proto    # Java 反射 → .proto 文件
+make generate          # protoc → Go + Node.js（ts-proto）
+make generate-python   # protoc → Python（需要 grpcio-tools）
+make verify            # go build ./...
 ```
 
 ## 使用方式

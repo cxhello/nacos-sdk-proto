@@ -26,9 +26,10 @@ nacos-sdk-proto/
 ├── python/                         # Python package skeleton
 │   ├── pyproject.toml
 │   └── nacos_sdk_proto/
-├── nodejs/                         # Node.js package skeleton
+├── nodejs/                         # Generated Node.js/TypeScript code (ts-proto)
 │   ├── package.json
-│   └── tsconfig.json
+│   ├── tsconfig.json
+│   └── src/                        # ts-proto generated .ts files
 ├── tools/proto-generator/          # Java reflection-based proto generator
 ├── docs/
 │   └── type-registry.json          # Registry of metadata.type values
@@ -58,37 +59,31 @@ See [`docs/type-registry.json`](docs/type-registry.json) for the complete regist
 ### Prerequisites
 
 - Java 17+ and Maven (for proto-generator)
-- `protoc`, `protoc-gen-go`, `protoc-gen-go-grpc`
-- Nacos `api` module installed locally (`mvn install -pl api -am -DskipTests`)
+- Go 1.20+ with `protoc-gen-go`, `protoc-gen-go-grpc`
+- Node.js 20+ and npm (for ts-proto)
+- `protoc` (Protocol Buffers compiler)
 
 ```bash
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+npm install   # installs ts-proto in root
 ```
 
-### Generate Proto Files (from Nacos source)
+### One-Command Sync (recommended)
 
 ```bash
-make generate-proto
+make sync    # clone nacos → build api → generate all → verify
 ```
 
-### Generate Language Bindings
+Automatically clones Nacos develop HEAD, builds nacos-api, generates proto + Go + Node.js code, and verifies. Skips if already up to date.
+
+### Manual Steps
 
 ```bash
-# Go (default)
-make generate
-
-# Python (requires grpcio-tools)
-make generate-python
-
-# Node.js (requires protoc-gen-ts)
-make generate-nodejs
-```
-
-### Full Pipeline
-
-```bash
-make verify    # generate-proto → generate → go build
+make generate-proto    # Java reflection → .proto files
+make generate          # protoc → Go + Node.js (ts-proto)
+make generate-python   # protoc → Python (requires grpcio-tools)
+make verify            # go build ./...
 ```
 
 ## Consuming the Packages
