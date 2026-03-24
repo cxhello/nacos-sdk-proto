@@ -46,7 +46,7 @@ generate-proto:
 		  --go-module-base $(GO_MODULE_BASE)"
 
 # === 各语言代码生成 ===
-generate: generate-go
+generate: generate-go generate-nodejs
 
 generate-go:
 	find $(PROTO_DIR) -name '*.proto' | xargs protoc \
@@ -62,11 +62,11 @@ generate-python:
 		$$(find $(PROTO_DIR) -name '*.proto')
 
 generate-nodejs:
-	find $(PROTO_DIR) -name '*.proto' | xargs protoc \
-		--proto_path=$(PROTO_DIR) \
-		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
-		--ts_out=$(NODEJS_OUT)/src \
-		--grpc_out=$(NODEJS_OUT)/src
+	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' | xargs protoc \
+		--plugin=./node_modules/.bin/protoc-gen-ts_proto \
+		--ts_proto_out=$(NODEJS_OUT)/src \
+		--ts_proto_opt=outputJsonMethods=true,outputEncodeMethods=false,outputClientImpl=false \
+		--proto_path=$(PROTO_DIR)
 
 clean:
 	find $(GO_OUT) -name '*.pb.go' -delete
@@ -88,4 +88,7 @@ migrate:
 	$(MAKE) generate-proto
 	$(MAKE) generate
 	$(MAKE) sync-go-mod
+	sed -i '' 's|github.com/[^/]*/$(REPO_NAME)|github.com/$(REPO_OWNER)/$(REPO_NAME)|g' \
+		$(NODEJS_OUT)/package.json $(PYTHON_OUT)/pyproject.toml \
+		README.md README_zh.md
 	@echo "Done. Review changes and commit."
