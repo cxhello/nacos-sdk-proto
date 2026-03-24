@@ -64,6 +64,7 @@ generate-python:
 	find $(PYTHON_OUT)/nacos_sdk_proto -type d -exec touch {}/__init__.py \;
 
 generate-nodejs:
+	mkdir -p $(NODEJS_OUT)/src
 	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' | xargs protoc \
 		--plugin=./node_modules/.bin/protoc-gen-ts_proto \
 		--ts_proto_out=$(NODEJS_OUT)/src \
