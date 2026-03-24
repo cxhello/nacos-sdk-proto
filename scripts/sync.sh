@@ -31,7 +31,8 @@ echo "Syncing from nacos@${REMOTE_SHA:0:7}..."
 # 3. Build nacos-api
 make setup
 
-# 4. Generate + verify
+# 4. Clean → Generate → Verify
+make clean
 make generate-proto
 make generate
 make verify
