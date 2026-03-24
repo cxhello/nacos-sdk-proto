@@ -179,7 +179,7 @@ const file_ai_securityscheme_proto_rawDesc = "" +
 	"\x06scheme\x18\x03 \x01(\tR\x06scheme\x12\x0e\n" +
 	"\x02in\x18\x04 \x01(\tR\x02in\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12,\n" +
-	"\x11defaultCredential\x18\x06 \x01(\tR\x11defaultCredentialB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x11defaultCredential\x18\x06 \x01(\tR\x11defaultCredentialB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_securityscheme_proto_rawDescOnce sync.Once

@@ -104,7 +104,7 @@ const file_ai_agentcapabilities_proto_rawDesc = "" +
 	"\x16stateTransitionHistory\x18\x03 \x01(\bR\x16stateTransitionHistory\x128\n" +
 	"\n" +
 	"extensions\x18\x04 \x03(\v2\x18.nacos.ai.AgentExtensionR\n" +
-	"extensionsB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"extensionsB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_agentcapabilities_proto_rawDescOnce sync.Once

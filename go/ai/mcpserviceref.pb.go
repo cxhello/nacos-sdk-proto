@@ -102,7 +102,7 @@ const file_ai_mcpserviceref_proto_rawDesc = "" +
 	"\vnamespaceId\x18\x01 \x01(\tR\vnamespaceId\x12\x1c\n" +
 	"\tgroupName\x18\x02 \x01(\tR\tgroupName\x12 \n" +
 	"\vserviceName\x18\x03 \x01(\tR\vserviceName\x12,\n" +
-	"\x11transportProtocol\x18\x04 \x01(\tR\x11transportProtocolB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x11transportProtocol\x18\x04 \x01(\tR\x11transportProtocolB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_mcpserviceref_proto_rawDescOnce sync.Once

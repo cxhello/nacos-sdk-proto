@@ -140,7 +140,7 @@ const file_ai_input_proto_rawDesc = "" +
 	"\bisSecret\x18\x05 \x01(\bR\bisSecret\x12\"\n" +
 	"\fdefaultValue\x18\x06 \x01(\tR\fdefaultValue\x12\x18\n" +
 	"\achoices\x18\a \x03(\tR\achoices\x12 \n" +
-	"\vplaceholder\x18\b \x01(\tR\vplaceholderB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\vplaceholder\x18\b \x01(\tR\vplaceholderB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_input_proto_rawDescOnce sync.Once

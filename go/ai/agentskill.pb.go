@@ -132,7 +132,7 @@ const file_ai_agentskill_proto_rawDesc = "" +
 	"\n" +
 	"inputModes\x18\x06 \x03(\tR\n" +
 	"inputModes\x12 \n" +
-	"\voutputModes\x18\a \x03(\tR\voutputModesB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\voutputModes\x18\a \x03(\tR\voutputModesB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_agentskill_proto_rawDescOnce sync.Once

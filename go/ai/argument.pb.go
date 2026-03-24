@@ -67,7 +67,7 @@ const file_ai_argument_proto_rawDesc = "" +
 	"\n" +
 	"\x11ai/argument.proto\x12\bnacos.ai\"\n" +
 	"\n" +
-	"\bArgumentB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\bArgumentB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_argument_proto_rawDescOnce sync.Once

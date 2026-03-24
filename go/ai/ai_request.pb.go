@@ -753,7 +753,7 @@ const file_ai_ai_request_proto_rawDesc = "" +
 	"\amcpName\x18\x04 \x01(\tR\amcpName\x12N\n" +
 	"\x13serverSpecification\x18\x05 \x01(\v2\x1c.nacos.ai.McpServerBasicInfoR\x13serverSpecification\x12L\n" +
 	"\x11toolSpecification\x18\x06 \x01(\v2\x1e.nacos.ai.McpToolSpecificationR\x11toolSpecification\x12O\n" +
-	"\x15endpointSpecification\x18\a \x01(\v2\x19.nacos.ai.McpEndpointSpecR\x15endpointSpecificationB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x15endpointSpecification\x18\a \x01(\v2\x19.nacos.ai.McpEndpointSpecR\x15endpointSpecificationB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_ai_request_proto_rawDescOnce sync.Once

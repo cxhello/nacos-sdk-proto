@@ -111,7 +111,7 @@ const file_ai_prompt_proto_rawDesc = "" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12\x1a\n" +
 	"\btemplate\x18\x03 \x01(\tR\btemplate\x12\x10\n" +
 	"\x03md5\x18\x04 \x01(\tR\x03md5\x126\n" +
-	"\tvariables\x18\x05 \x03(\v2\x18.nacos.ai.PromptVariableR\tvariablesB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\tvariables\x18\x05 \x03(\v2\x18.nacos.ai.PromptVariableR\tvariablesB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_prompt_proto_rawDescOnce sync.Once

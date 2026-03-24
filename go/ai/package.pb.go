@@ -162,7 +162,7 @@ const file_ai_package_proto_rawDesc = "" +
 	"\x10packageArguments\x18\b \x03(\v2\x12.nacos.ai.ArgumentR\x10packageArguments\x12K\n" +
 	"\x14environmentVariables\x18\t \x03(\v2\x17.nacos.ai.KeyValueInputR\x14environmentVariables\x124\n" +
 	"\ttransport\x18\n" +
-	" \x01(\v2\x16.google.protobuf.ValueR\ttransportB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	" \x01(\v2\x16.google.protobuf.ValueR\ttransportB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_package_proto_rawDescOnce sync.Once

@@ -949,7 +949,7 @@ const file_config_config_response_proto_rawDesc = "" +
 	"resultCode\x12\x1c\n" +
 	"\terrorCode\x18\x02 \x01(\x05R\terrorCode\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1c\n" +
-	"\trequestId\x18\x04 \x01(\tR\trequestIdB2Z0github.com/nacos-group/nacos-sdk-proto-go/configb\x06proto3"
+	"\trequestId\x18\x04 \x01(\tR\trequestIdB.Z,github.com/cxhello/nacos-sdk-proto/go/configb\x06proto3"
 
 var (
 	file_config_config_response_proto_rawDescOnce sync.Once

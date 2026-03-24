@@ -102,7 +102,7 @@ const file_ai_mcpendpointinfo_proto_rawDesc = "" +
 	"\bprotocol\x18\x01 \x01(\tR\bprotocol\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x12\n" +
 	"\x04port\x18\x03 \x01(\x05R\x04port\x12\x12\n" +
-	"\x04path\x18\x04 \x01(\tR\x04pathB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x04path\x18\x04 \x01(\tR\x04pathB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_mcpendpointinfo_proto_rawDescOnce sync.Once

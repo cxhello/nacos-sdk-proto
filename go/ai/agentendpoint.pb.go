@@ -140,7 +140,7 @@ const file_ai_agentendpoint_proto_rawDesc = "" +
 	"supportTls\x12\x18\n" +
 	"\aversion\x18\x06 \x01(\tR\aversion\x12\x1a\n" +
 	"\bprotocol\x18\a \x01(\tR\bprotocol\x12\x14\n" +
-	"\x05query\x18\b \x01(\tR\x05queryB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x05query\x18\b \x01(\tR\x05queryB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_agentendpoint_proto_rawDescOnce sync.Once

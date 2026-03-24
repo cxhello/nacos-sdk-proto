@@ -97,7 +97,7 @@ const file_ai_mcpserverremoteserviceconfig_proto_rawDesc = "" +
 	"\n" +
 	"exportPath\x18\x02 \x01(\tR\n" +
 	"exportPath\x12W\n" +
-	"\x17frontEndpointConfigList\x18\x03 \x03(\v2\x1d.nacos.ai.FrontEndpointConfigR\x17frontEndpointConfigListB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x17frontEndpointConfigList\x18\x03 \x03(\v2\x1d.nacos.ai.FrontEndpointConfigR\x17frontEndpointConfigListB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_mcpserverremoteserviceconfig_proto_rawDescOnce sync.Once

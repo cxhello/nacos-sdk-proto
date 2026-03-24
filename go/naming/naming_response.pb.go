@@ -774,7 +774,7 @@ const file_naming_naming_response_proto_rawDesc = "" +
 	"\terrorCode\x18\x02 \x01(\x05R\terrorCode\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1c\n" +
 	"\trequestId\x18\x04 \x01(\tR\trequestId\x12;\n" +
-	"\vserviceInfo\x18\x05 \x01(\v2\x19.nacos.naming.ServiceInfoR\vserviceInfoB2Z0github.com/nacos-group/nacos-sdk-proto-go/namingb\x06proto3"
+	"\vserviceInfo\x18\x05 \x01(\v2\x19.nacos.naming.ServiceInfoR\vserviceInfoB.Z,github.com/cxhello/nacos-sdk-proto/go/namingb\x06proto3"
 
 var (
 	file_naming_naming_response_proto_rawDescOnce sync.Once

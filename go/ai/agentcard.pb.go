@@ -224,7 +224,7 @@ const file_ai_agentcard_proto_rawDesc = "" +
 	"!supportsAuthenticatedExtendedCard\x18\x11 \x01(\bR!supportsAuthenticatedExtendedCard\x1a\\\n" +
 	"\x14SecuritySchemesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12.\n" +
-	"\x05value\x18\x02 \x01(\v2\x18.nacos.ai.SecuritySchemeR\x05value:\x028\x01B.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x05value\x18\x02 \x01(\v2\x18.nacos.ai.SecuritySchemeR\x05value:\x028\x01B*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_agentcard_proto_rawDescOnce sync.Once

@@ -1011,7 +1011,7 @@ const file_naming_naming_request_proto_rawDesc = "" +
 	"\vserviceName\x18\x03 \x01(\tR\vserviceName\x12\x1c\n" +
 	"\tgroupName\x18\x04 \x01(\tR\tgroupName\x12\x1c\n" +
 	"\tsubscribe\x18\x05 \x01(\bR\tsubscribe\x12\x1a\n" +
-	"\bclusters\x18\x06 \x01(\tR\bclustersB2Z0github.com/nacos-group/nacos-sdk-proto-go/namingb\x06proto3"
+	"\bclusters\x18\x06 \x01(\tR\bclustersB.Z,github.com/cxhello/nacos-sdk-proto/go/namingb\x06proto3"
 
 var (
 	file_naming_naming_request_proto_rawDescOnce sync.Once

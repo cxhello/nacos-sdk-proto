@@ -102,7 +102,7 @@ const file_ai_icon_proto_rawDesc = "" +
 	"\x03src\x18\x01 \x01(\tR\x03src\x12\x1a\n" +
 	"\bmimeType\x18\x02 \x01(\tR\bmimeType\x12\x14\n" +
 	"\x05sizes\x18\x03 \x03(\tR\x05sizes\x12\x14\n" +
-	"\x05theme\x18\x04 \x01(\tR\x05themeB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x05theme\x18\x04 \x01(\tR\x05themeB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_icon_proto_rawDescOnce sync.Once

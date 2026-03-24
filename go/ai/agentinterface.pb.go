@@ -84,7 +84,7 @@ const file_ai_agentinterface_proto_rawDesc = "" +
 	"\x17ai/agentinterface.proto\x12\bnacos.ai\"@\n" +
 	"\x0eAgentInterface\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1c\n" +
-	"\ttransport\x18\x02 \x01(\tR\ttransportB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\ttransport\x18\x02 \x01(\tR\ttransportB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_agentinterface_proto_rawDescOnce sync.Once

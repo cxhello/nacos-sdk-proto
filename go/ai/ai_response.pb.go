@@ -622,7 +622,7 @@ const file_ai_ai_response_proto_rawDesc = "" +
 	"\terrorCode\x18\x02 \x01(\x05R\terrorCode\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1c\n" +
 	"\trequestId\x18\x04 \x01(\tR\trequestId\x12\x14\n" +
-	"\x05mcpId\x18\x05 \x01(\tR\x05mcpIdB.Z,github.com/nacos-group/nacos-sdk-proto-go/aib\x06proto3"
+	"\x05mcpId\x18\x05 \x01(\tR\x05mcpIdB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_ai_response_proto_rawDescOnce sync.Once
