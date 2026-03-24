@@ -65,7 +65,7 @@ generate-nodejs:
 	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' | xargs protoc \
 		--plugin=./node_modules/.bin/protoc-gen-ts_proto \
 		--ts_proto_out=$(NODEJS_OUT)/src \
-		--ts_proto_opt=outputJsonMethods=true,outputEncodeMethods=false,outputClientImpl=false \
+		--ts_proto_opt=outputJsonMethods=true,outputEncodeMethods=false,outputClientImpl=false,exportCommonSymbols=false \
 		--proto_path=$(PROTO_DIR)
 
 clean:
