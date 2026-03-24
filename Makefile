@@ -98,12 +98,12 @@ update-version:
 		"$$SHA" "$$DATE" > $(PROTO_DIR)/VERSION
 
 verify:
+	# 单元测试（含字段一致性校验）
+	cd $(GENERATOR_DIR) && mvn -q test
 	# Go 编译
 	cd $(GO_OUT) && go build ./...
 	# Node.js TypeScript 编译
 	cd $(NODEJS_OUT) && npx tsc --noEmit
-	# 单元测试（含字段一致性校验）
-	cd $(GENERATOR_DIR) && mvn -q test
 	# 幂等性检查：重新生成 proto，不应有 diff
 	$(MAKE) generate-proto
 	git diff --exit-code -- $(PROTO_DIR)/ ':!$(PROTO_DIR)/VERSION'
