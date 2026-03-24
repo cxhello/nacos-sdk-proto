@@ -1,3 +1,4 @@
-.nacos/
+.nacos
 tools/proto-generator/target/
 node_modules/
+package-lock.json
