@@ -73,9 +73,10 @@ generate-nodejs:
 		sed 's|^\./||; s|\.ts$$||; s|^|export * from "./|; s|$$|";|' > index.ts
 
 clean:
-	# Proto（保留手写文件）
+	# Proto（保留手写文件，删除 VERSION 使 skip check 失效）
 	find $(PROTO_DIR) -name '*.proto' -not -name 'nacos_grpc_service.proto' -delete 2>/dev/null || true
 	find $(PROTO_DIR) -type d -empty -delete 2>/dev/null || true
+	rm -f $(PROTO_DIR)/VERSION
 	# Go
 	find $(GO_OUT) -name '*.pb.go' -delete
 	# Node.js

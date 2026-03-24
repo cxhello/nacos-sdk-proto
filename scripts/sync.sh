@@ -21,7 +21,13 @@ if [ -f "$PROTO_VERSION" ]; then
     LOCAL_SHA=$(jq -r .nacos_commit "$PROTO_VERSION" 2>/dev/null || echo "")
 fi
 
-if [ "${FORCE:-}" != "1" ] && [ "$REMOTE_SHA" = "$LOCAL_SHA" ]; then
+# Double check: SHA must match AND generated files must exist
+HAS_GENERATED=true
+if [ -z "$(find go -name '*.pb.go' 2>/dev/null | head -1)" ]; then
+    HAS_GENERATED=false
+fi
+
+if [ "${FORCE:-}" != "1" ] && [ "$REMOTE_SHA" = "$LOCAL_SHA" ] && [ "$HAS_GENERATED" = "true" ]; then
     echo "Already up to date ($REMOTE_SHA)."
     exit 0
 fi

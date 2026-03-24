@@ -43,12 +43,18 @@ jobs:
           if [ -f nacos-sdk-proto/proto/VERSION ]; then
             LAST_SHA=$(jq -r .nacos_commit nacos-sdk-proto/proto/VERSION)
           fi
-          if [ "$LAST_SHA" = "${{ steps.resolve.outputs.sha }}" ]; then
+          # Double check: SHA must match AND generated files must exist
+          HAS_GENERATED=true
+          if [ -z "$(find nacos-sdk-proto/go -name '*.pb.go' 2>/dev/null | head -1)" ]; then
+            HAS_GENERATED=false
+          fi
+          if [ "$LAST_SHA" = "${{ steps.resolve.outputs.sha }}" ] && [ "$HAS_GENERATED" = "true" ]; then
             echo "needed=false" >> "$GITHUB_OUTPUT"
           else
             echo "needed=true" >> "$GITHUB_OUTPUT"
           fi
 
+      # --- Java toolchain (generate-proto + unit tests) ---
       - name: Checkout nacos
         if: steps.check.outputs.needed == 'true'
         uses: actions/checkout@v4
@@ -66,25 +72,39 @@ jobs:
           java-version: 17
           cache: maven
 
+      - name: Build nacos-api
+        if: steps.check.outputs.needed == 'true'
+        run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
+
+      - name: Link nacos for Makefile
+        if: steps.check.outputs.needed == 'true'
+        run: ln -s "$GITHUB_WORKSPACE/nacos" nacos-sdk-proto/.nacos
+
+      # --- Go toolchain (generate-go + verify) ---
       - name: Setup Go
         if: steps.check.outputs.needed == 'true'
         uses: actions/setup-go@v5
         with:
           go-version-file: nacos-sdk-proto/go/go.mod
 
+      - name: Install Go protoc plugins
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+      # --- Python toolchain (generate-python) ---
       - name: Setup Python
         if: steps.check.outputs.needed == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install protoc plugins
+      - name: Install grpcio-tools
         if: steps.check.outputs.needed == 'true'
-        run: |
-          pip install grpcio-tools
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+        run: pip install grpcio-tools
 
+      # --- Node.js toolchain (generate-nodejs + tsc verify) ---
       - name: Setup Node.js
         if: steps.check.outputs.needed == 'true'
         uses: actions/setup-node@v4
@@ -95,14 +115,7 @@ jobs:
         if: steps.check.outputs.needed == 'true'
         run: cd nacos-sdk-proto && npm install
 
-      - name: Build nacos-api
-        if: steps.check.outputs.needed == 'true'
-        run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
-
-      - name: Link nacos for Makefile
-        if: steps.check.outputs.needed == 'true'
-        run: ln -s "$GITHUB_WORKSPACE/nacos" nacos-sdk-proto/.nacos
-
+      # --- Generate and verify ---
       - name: Generate and verify
         if: steps.check.outputs.needed == 'true'
         run: |
