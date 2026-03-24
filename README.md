@@ -60,30 +60,32 @@ See [`docs/type-registry.json`](docs/type-registry.json) for the complete regist
 
 - Java 17+ and Maven (for proto-generator)
 - Go 1.20+ with `protoc-gen-go`, `protoc-gen-go-grpc`
+- Python 3.11+ with `grpcio-tools` (for Python code generation)
 - Node.js 20+ and npm (for ts-proto)
 - `protoc` (Protocol Buffers compiler)
 
 ```bash
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+pip install grpcio-tools
 npm install   # installs ts-proto in root
 ```
 
 ### One-Command Sync (recommended)
 
 ```bash
-make sync    # clone nacos → build api → generate all → verify
+make sync    # clone nacos → build api → clean → generate all → verify
 ```
 
-Automatically clones Nacos develop HEAD, builds nacos-api, generates proto + Go + Node.js code, and verifies. Skips if already up to date.
+Automatically clones Nacos develop HEAD, builds nacos-api, cleans all generated files, regenerates proto + Go + Node.js + Python code, and runs full verification (Go build, TypeScript compile, idempotency check). Skips if already up to date.
 
 ### Manual Steps
 
 ```bash
+make clean             # Remove all generated files (preserves hand-written files)
 make generate-proto    # Java reflection → .proto files
-make generate          # protoc → Go + Node.js (ts-proto)
-make generate-python   # protoc → Python (requires grpcio-tools)
-make verify            # go build ./...
+make generate          # protoc → Go + Node.js (ts-proto) + Python
+make verify            # Go build + tsc --noEmit + idempotency check
 ```
 
 ## Consuming the Packages
@@ -116,7 +118,7 @@ Use `protoc` with the appropriate language plugin. All proto files are under the
 
 Runs weekly (Monday UTC 00:00) or manually via `workflow_dispatch`. Compares `proto/VERSION` commit SHA with Nacos develop HEAD — skips if unchanged.
 
-Flow: clone nacos → `mvn install -pl api` → `make generate-proto` → `make generate` → verify Go build → create PR if diff exists.
+Flow: clone nacos → `mvn install -pl api` → `make clean` → `make generate-proto` → `make generate` → `make verify` (Go build + tsc + idempotency) → create PR if diff exists.
 
 ### Release (`release.yml`)
 

@@ -58,30 +58,32 @@ nacos-sdk-proto/
 
 - Java 17+ 和 Maven（用于 proto-generator）
 - Go 1.20+，安装 `protoc-gen-go`、`protoc-gen-go-grpc`
+- Python 3.11+，安装 `grpcio-tools`（用于 Python 代码生成）
 - Node.js 20+ 和 npm（用于 ts-proto）
 - `protoc`（Protocol Buffers 编译器）
 
 ```bash
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+pip install grpcio-tools
 npm install   # 安装根目录 ts-proto
 ```
 
 ### 一键同步（推荐）
 
 ```bash
-make sync    # clone nacos → build api → 生成全部 → 验证
+make sync    # clone nacos → build api → clean → 生成全部 → 验证
 ```
 
-自动 clone Nacos develop 最新代码，构建 nacos-api，生成 proto + Go + Node.js 代码，并验证编译。如果已是最新则秒级跳过。
+自动 clone Nacos develop 最新代码，构建 nacos-api，清理所有生成文件，重新生成 proto + Go + Node.js + Python 代码，并执行完整验证（Go 编译、TypeScript 编译、幂等性检查）。如果已是最新则秒级跳过。
 
 ### 手动步骤
 
 ```bash
+make clean             # 清理所有生成文件（保留手写文件）
 make generate-proto    # Java 反射 → .proto 文件
-make generate          # protoc → Go + Node.js（ts-proto）
-make generate-python   # protoc → Python（需要 grpcio-tools）
-make verify            # go build ./...
+make generate          # protoc → Go + Node.js（ts-proto）+ Python
+make verify            # Go 编译 + tsc --noEmit + 幂等性检查
 ```
 
 ## 使用方式
@@ -114,7 +116,7 @@ npm install @nacos/sdk-proto   # 发布到 npm 后可用
 
 每周一 UTC 00:00 定时运行，也支持通过 `workflow_dispatch` 手动触发。运行时先比较 `proto/VERSION` 中的 commit SHA 与 Nacos develop HEAD，相同则跳过。
 
-流程：clone nacos → `mvn install -pl api` → `make generate-proto` → `make generate` → Go 编译验证 → 有 diff 则创建 PR。
+流程：clone nacos → `mvn install -pl api` → `make clean` → `make generate-proto` → `make generate` → `make verify`（Go 编译 + tsc + 幂等性）→ 有 diff 则创建 PR。
 
 ### 发布（`release.yml`）
 
