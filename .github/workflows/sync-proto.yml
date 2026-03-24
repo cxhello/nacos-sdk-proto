@@ -85,6 +85,16 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
+      - name: Setup Node.js
+        if: steps.check.outputs.needed == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install ts-proto
+        if: steps.check.outputs.needed == 'true'
+        run: cd nacos-sdk-proto && npm install
+
       - name: Build nacos-api
         if: steps.check.outputs.needed == 'true'
         run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
