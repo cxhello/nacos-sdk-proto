@@ -86,6 +86,7 @@ clean:
 		find $(PYTHON_OUT)/nacos_sdk_proto -name '__init__.py' -delete; \
 		find $(PYTHON_OUT)/nacos_sdk_proto -type d -empty -delete; \
 	fi
+	@echo "Clean complete. Hand-written files preserved."
 
 sync-go-mod:
 	cd $(GO_OUT) && go mod edit -module $(GO_MODULE_BASE)
