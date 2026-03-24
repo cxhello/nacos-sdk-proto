@@ -1,0 +1,138 @@
+name: Sync Proto
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      nacos_ref:
+        description: 'Nacos ref (branch/tag/SHA, leave empty for develop HEAD)'
+        required: false
+
+concurrency:
+  group: sync-proto
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout nacos-sdk-proto
+        uses: actions/checkout@v4
+        with:
+          path: nacos-sdk-proto
+
+      - name: Resolve nacos ref
+        id: resolve
+        run: |
+          if [ -n "${{ inputs.nacos_ref }}" ]; then
+            REF="${{ inputs.nacos_ref }}"
+          else
+            REF="develop"
+          fi
+          echo "ref=$REF" >> "$GITHUB_OUTPUT"
+          SHA=$(git ls-remote https://github.com/alibaba/nacos.git "$REF" | head -1 | cut -f1)
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Check if sync needed
+        id: check
+        run: |
+          LAST_SHA=""
+          if [ -f nacos-sdk-proto/proto/VERSION ]; then
+            LAST_SHA=$(jq -r .nacos_commit nacos-sdk-proto/proto/VERSION)
+          fi
+          if [ "$LAST_SHA" = "${{ steps.resolve.outputs.sha }}" ]; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout nacos
+        if: steps.check.outputs.needed == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: alibaba/nacos
+          ref: ${{ steps.resolve.outputs.sha }}
+          path: nacos
+          depth: 1
+
+      - name: Setup Java
+        if: steps.check.outputs.needed == 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Setup Go
+        if: steps.check.outputs.needed == 'true'
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: nacos-sdk-proto/go/go.mod
+
+      - name: Setup Python
+        if: steps.check.outputs.needed == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install protoc plugins
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          pip install grpcio-tools
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+      - name: Build nacos-api
+        if: steps.check.outputs.needed == 'true'
+        run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
+
+      - name: Generate
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          cd nacos-sdk-proto
+          make generate-proto
+          make generate
+
+      - name: Update VERSION
+        if: steps.check.outputs.needed == 'true'
+        run: |
+          cat > nacos-sdk-proto/proto/VERSION << VEOF
+          {
+            "source": "branch",
+            "nacos_ref": "${{ steps.resolve.outputs.ref }}",
+            "nacos_commit": "${{ steps.resolve.outputs.sha }}",
+            "generated_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          VEOF
+
+      - name: Verify
+        if: steps.check.outputs.needed == 'true'
+        run: cd nacos-sdk-proto/go && go build ./...
+
+      - name: Check diff and create PR
+        if: steps.check.outputs.needed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd nacos-sdk-proto
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "No changes detected, skipping PR."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          SHORT_SHA=$(echo "${{ steps.resolve.outputs.sha }}" | cut -c1-7)
+          BRANCH="sync/nacos-${SHORT_SHA}"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "chore: sync proto from nacos@${SHORT_SHA} (${{ steps.resolve.outputs.ref }})"
+          git push origin "$BRANCH" --force-with-lease
+          EXISTING=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number')
+          if [ -z "$EXISTING" ]; then
+            gh pr create \
+              --title "chore: sync proto from nacos@${SHORT_SHA}" \
+              --body "Auto-generated from alibaba/nacos@${{ steps.resolve.outputs.sha }} (ref: ${{ steps.resolve.outputs.ref }})"
+          fi
