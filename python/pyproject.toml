@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nacos-sdk-proto"
+version = "0.0.1-dev"
+description = "Nacos SDK Protocol Buffers for Python"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0"}
+dependencies = [
+    "protobuf>=4.21.0",
+    "grpcio>=1.50.0",
+]
+
+[project.urls]
+Repository = "https://github.com/cxhello/nacos-sdk-proto"
