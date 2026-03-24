@@ -96,7 +96,13 @@ update-version:
 		"$$SHA" "$$DATE" > $(PROTO_DIR)/VERSION
 
 verify:
+	# Go 编译
 	cd $(GO_OUT) && go build ./...
+	# Node.js TypeScript 编译
+	cd $(NODEJS_OUT) && npx tsc --noEmit
+	# 幂等性检查：重新生成 proto，不应有 diff
+	$(MAKE) generate-proto
+	git diff --exit-code -- $(PROTO_DIR)/ ':!$(PROTO_DIR)/VERSION'
 
 migrate:
 	$(MAKE) generate-proto
