@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "devDependencies": {
+    "ts-proto": "^2.11.6"
+  }
+}

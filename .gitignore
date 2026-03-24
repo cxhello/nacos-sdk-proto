@@ -1,2 +1,3 @@
 .nacos/
 tools/proto-generator/target/
+node_modules/
