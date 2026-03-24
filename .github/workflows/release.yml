@@ -1,0 +1,159 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      nacos_tag:
+        description: 'Nacos release tag (e.g. 3.2.0)'
+        required: true
+      version:
+        description: 'Package version (defaults to nacos_tag)'
+        required: false
+      dry_run:
+        description: 'Dry run (skip actual publish)'
+        type: boolean
+        default: true
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+    steps:
+      - name: Determine version
+        id: version
+        run: |
+          VER="${{ inputs.version }}"
+          if [ -z "$VER" ]; then
+            VER="${{ inputs.nacos_tag }}"
+          fi
+          echo "value=$VER" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          path: nacos-sdk-proto
+
+      - uses: actions/checkout@v4
+        with:
+          repository: alibaba/nacos
+          ref: ${{ inputs.nacos_tag }}
+          path: nacos
+          depth: 1
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: nacos-sdk-proto/go/go.mod
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install protoc plugins
+        run: |
+          pip install grpcio-tools
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+      - name: Build nacos-api
+        run: cd nacos && mvn install -pl api -am -DskipTests -Drat.skip=true -q
+
+      - name: Generate and verify
+        run: |
+          cd nacos-sdk-proto
+          make generate-proto
+          make generate
+          cd go && go build ./...
+
+      - name: Update VERSION
+        run: |
+          SHA=$(cd nacos && git rev-parse HEAD)
+          cat > nacos-sdk-proto/proto/VERSION << VEOF
+          {
+            "source": "tag",
+            "nacos_ref": "${{ inputs.nacos_tag }}",
+            "nacos_commit": "$SHA",
+            "generated_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          VEOF
+
+      - name: Commit and tag
+        run: |
+          cd nacos-sdk-proto
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          VER="${{ steps.version.outputs.value }}"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "release: v${VER} (nacos ${{ inputs.nacos_tag }})"
+          fi
+          git tag "v${VER}"
+          git tag "go/v${VER}"
+          git push origin main --tags
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nacos-sdk-proto
+          path: nacos-sdk-proto/
+
+  release-go:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Go release done via git tag go/v${{ needs.generate.outputs.version }}"
+
+  release-python:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: nacos-sdk-proto
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build package
+        run: |
+          pip install build twine
+          cd python
+          python -m build
+      - name: Publish
+        if: ${{ !inputs.dry_run }}
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: cd python && twine upload dist/*
+      - name: Dry-run report
+        if: ${{ inputs.dry_run }}
+        run: ls -la python/dist/
+
+  release-nodejs:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: nacos-sdk-proto
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - name: Build package
+        run: cd nodejs && npm pack
+      - name: Publish
+        if: ${{ !inputs.dry_run }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd nodejs && npm publish
+      - name: Dry-run report
+        if: ${{ inputs.dry_run }}
+        run: ls -la nodejs/*.tgz
