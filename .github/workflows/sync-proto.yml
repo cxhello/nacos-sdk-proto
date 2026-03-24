@@ -164,7 +164,7 @@ jobs:
           git checkout -b "$BRANCH"
           git add -A
           git commit -m "chore: sync proto from nacos@${SHORT_SHA} (${{ steps.resolve.outputs.ref }})"
-          git push origin "$BRANCH" --force-with-lease
+          git push origin "$BRANCH" --force
           EXISTING=$(gh pr list --head "$BRANCH" --json number --jq '.[0].number')
           if [ -z "$EXISTING" ]; then
             gh pr create \
