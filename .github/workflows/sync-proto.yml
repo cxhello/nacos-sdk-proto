@@ -63,7 +63,7 @@ jobs:
           repository: alibaba/nacos
           ref: ${{ steps.resolve.outputs.sha }}
           path: nacos
-          depth: 1
+          fetch-depth: 1
 
       - name: Setup Java
         if: steps.check.outputs.needed == 'true'
@@ -97,6 +97,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version-file: nacos-sdk-proto/go/go.mod
+          cache-dependency-path: nacos-sdk-proto/go/go.sum
 
       - name: Install Go protoc plugins
         if: steps.check.outputs.needed == 'true'

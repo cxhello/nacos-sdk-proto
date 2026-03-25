@@ -42,7 +42,7 @@ jobs:
           repository: alibaba/nacos
           ref: ${{ inputs.nacos_tag }}
           path: nacos
-          depth: 1
+          fetch-depth: 1
 
       - uses: actions/setup-java@v4
         with:
@@ -69,6 +69,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: nacos-sdk-proto/go/go.mod
+          cache-dependency-path: nacos-sdk-proto/go/go.sum
 
       - name: Install Go protoc plugins
         run: |
