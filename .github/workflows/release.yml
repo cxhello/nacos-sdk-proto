@@ -100,7 +100,7 @@ jobs:
           make clean
           make generate-proto
           make generate
-          make verify
+          make verify-build
 
       - name: Update VERSION
         run: |
