@@ -16,6 +16,7 @@ export * from "./ai/input";
 export * from "./ai/keyvalueinput";
 export * from "./ai/mcpendpointinfo";
 export * from "./ai/mcpendpointspec";
+export * from "./ai/mcpresourcespecification";
 export * from "./ai/mcpserverbasicinfo";
 export * from "./ai/mcpserverdetailinfo";
 export * from "./ai/mcpserverremoteserviceconfig";

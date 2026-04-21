@@ -19,12 +19,25 @@ export interface AgentEndpoint {
   path: string;
   supportTls: boolean;
   version: string;
+  protocolVersion: string;
+  tenant: string;
   protocol: string;
   query: string;
 }
 
 function createBaseAgentEndpoint(): AgentEndpoint {
-  return { transport: "", address: "", port: 0, path: "", supportTls: false, version: "", protocol: "", query: "" };
+  return {
+    transport: "",
+    address: "",
+    port: 0,
+    path: "",
+    supportTls: false,
+    version: "",
+    protocolVersion: "",
+    tenant: "",
+    protocol: "",
+    query: "",
+  };
 }
 
 export const AgentEndpoint: MessageFns<AgentEndpoint> = {
@@ -36,6 +49,8 @@ export const AgentEndpoint: MessageFns<AgentEndpoint> = {
       path: isSet(object.path) ? globalThis.String(object.path) : "",
       supportTls: isSet(object.supportTls) ? globalThis.Boolean(object.supportTls) : false,
       version: isSet(object.version) ? globalThis.String(object.version) : "",
+      protocolVersion: isSet(object.protocolVersion) ? globalThis.String(object.protocolVersion) : "",
+      tenant: isSet(object.tenant) ? globalThis.String(object.tenant) : "",
       protocol: isSet(object.protocol) ? globalThis.String(object.protocol) : "",
       query: isSet(object.query) ? globalThis.String(object.query) : "",
     };
@@ -61,6 +76,12 @@ export const AgentEndpoint: MessageFns<AgentEndpoint> = {
     if (message.version !== "") {
       obj.version = message.version;
     }
+    if (message.protocolVersion !== "") {
+      obj.protocolVersion = message.protocolVersion;
+    }
+    if (message.tenant !== "") {
+      obj.tenant = message.tenant;
+    }
     if (message.protocol !== "") {
       obj.protocol = message.protocol;
     }
@@ -81,6 +102,8 @@ export const AgentEndpoint: MessageFns<AgentEndpoint> = {
     message.path = object.path ?? "";
     message.supportTls = object.supportTls ?? false;
     message.version = object.version ?? "";
+    message.protocolVersion = object.protocolVersion ?? "";
+    message.tenant = object.tenant ?? "";
     message.protocol = object.protocol ?? "";
     message.query = object.query ?? "";
     return message;
