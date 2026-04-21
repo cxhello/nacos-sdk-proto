@@ -89,7 +89,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install ts-proto
         run: cd nacos-sdk-proto && npm install
@@ -191,7 +191,7 @@ jobs:
           name: nacos-sdk-proto
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org
       - name: Build package
         run: cd nodejs && npm pack
