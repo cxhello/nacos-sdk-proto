@@ -26,11 +26,14 @@ const (
 // metadata.type = "AgentInterface"
 // Flattened from: AgentInterface
 type AgentInterface struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Transport     string                 `protobuf:"bytes,2,opt,name=transport,proto3" json:"transport,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Url             string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Transport       string                 `protobuf:"bytes,2,opt,name=transport,proto3" json:"transport,omitempty"`
+	ProtocolBinding string                 `protobuf:"bytes,3,opt,name=protocolBinding,proto3" json:"protocolBinding,omitempty"`
+	ProtocolVersion string                 `protobuf:"bytes,4,opt,name=protocolVersion,proto3" json:"protocolVersion,omitempty"`
+	Tenant          string                 `protobuf:"bytes,5,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *AgentInterface) Reset() {
@@ -77,14 +80,38 @@ func (x *AgentInterface) GetTransport() string {
 	return ""
 }
 
+func (x *AgentInterface) GetProtocolBinding() string {
+	if x != nil {
+		return x.ProtocolBinding
+	}
+	return ""
+}
+
+func (x *AgentInterface) GetProtocolVersion() string {
+	if x != nil {
+		return x.ProtocolVersion
+	}
+	return ""
+}
+
+func (x *AgentInterface) GetTenant() string {
+	if x != nil {
+		return x.Tenant
+	}
+	return ""
+}
+
 var File_ai_agentinterface_proto protoreflect.FileDescriptor
 
 const file_ai_agentinterface_proto_rawDesc = "" +
 	"\n" +
-	"\x17ai/agentinterface.proto\x12\bnacos.ai\"@\n" +
+	"\x17ai/agentinterface.proto\x12\bnacos.ai\"\xac\x01\n" +
 	"\x0eAgentInterface\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x1c\n" +
-	"\ttransport\x18\x02 \x01(\tR\ttransportB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
+	"\ttransport\x18\x02 \x01(\tR\ttransport\x12(\n" +
+	"\x0fprotocolBinding\x18\x03 \x01(\tR\x0fprotocolBinding\x12(\n" +
+	"\x0fprotocolVersion\x18\x04 \x01(\tR\x0fprotocolVersion\x12\x16\n" +
+	"\x06tenant\x18\x05 \x01(\tR\x06tenantB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"
 
 var (
 	file_ai_agentinterface_proto_rawDescOnce sync.Once

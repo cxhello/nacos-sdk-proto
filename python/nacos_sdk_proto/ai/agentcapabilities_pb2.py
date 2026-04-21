@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from ai import agentextension_pb2 as ai_dot_agentextension__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x61i/agentcapabilities.proto\x12\x08nacos.ai\x1a\x17\x61i/agentextension.proto\"\x8f\x01\n\x11\x41gentCapabilities\x12\x11\n\tstreaming\x18\x01 \x01(\x08\x12\x19\n\x11pushNotifications\x18\x02 \x01(\x08\x12\x1e\n\x16stateTransitionHistory\x18\x03 \x01(\x08\x12,\n\nextensions\x18\x04 \x03(\x0b\x32\x18.nacos.ai.AgentExtensionB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x61i/agentcapabilities.proto\x12\x08nacos.ai\x1a\x17\x61i/agentextension.proto\"\xaa\x01\n\x11\x41gentCapabilities\x12\x11\n\tstreaming\x18\x01 \x01(\x08\x12\x19\n\x11pushNotifications\x18\x02 \x01(\x08\x12\x1e\n\x16stateTransitionHistory\x18\x03 \x01(\x08\x12\x19\n\x11\x65xtendedAgentCard\x18\x05 \x01(\x08\x12,\n\nextensions\x18\x04 \x03(\x0b\x32\x18.nacos.ai.AgentExtensionB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,5 +34,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z(github.com/cxhello/nacos-sdk-proto/go/ai'
   _globals['_AGENTCAPABILITIES']._serialized_start=66
-  _globals['_AGENTCAPABILITIES']._serialized_end=209
+  _globals['_AGENTCAPABILITIES']._serialized_end=236
 # @@protoc_insertion_point(module_scope)

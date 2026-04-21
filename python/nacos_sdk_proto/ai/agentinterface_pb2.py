@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x61i/agentinterface.proto\x12\x08nacos.ai\"0\n\x0e\x41gentInterface\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\ttransport\x18\x02 \x01(\tB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x61i/agentinterface.proto\x12\x08nacos.ai\"r\n\x0e\x41gentInterface\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x11\n\ttransport\x18\x02 \x01(\t\x12\x17\n\x0fprotocolBinding\x18\x03 \x01(\t\x12\x17\n\x0fprotocolVersion\x18\x04 \x01(\t\x12\x0e\n\x06tenant\x18\x05 \x01(\tB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,5 +33,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z(github.com/cxhello/nacos-sdk-proto/go/ai'
   _globals['_AGENTINTERFACE']._serialized_start=37
-  _globals['_AGENTINTERFACE']._serialized_end=85
+  _globals['_AGENTINTERFACE']._serialized_end=151
 # @@protoc_insertion_point(module_scope)

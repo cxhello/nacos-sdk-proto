@@ -30,6 +30,7 @@ type AgentCapabilities struct {
 	Streaming              bool                   `protobuf:"varint,1,opt,name=streaming,proto3" json:"streaming,omitempty"`
 	PushNotifications      bool                   `protobuf:"varint,2,opt,name=pushNotifications,proto3" json:"pushNotifications,omitempty"`
 	StateTransitionHistory bool                   `protobuf:"varint,3,opt,name=stateTransitionHistory,proto3" json:"stateTransitionHistory,omitempty"`
+	ExtendedAgentCard      bool                   `protobuf:"varint,5,opt,name=extendedAgentCard,proto3" json:"extendedAgentCard,omitempty"`
 	Extensions             []*AgentExtension      `protobuf:"bytes,4,rep,name=extensions,proto3" json:"extensions,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
@@ -86,6 +87,13 @@ func (x *AgentCapabilities) GetStateTransitionHistory() bool {
 	return false
 }
 
+func (x *AgentCapabilities) GetExtendedAgentCard() bool {
+	if x != nil {
+		return x.ExtendedAgentCard
+	}
+	return false
+}
+
 func (x *AgentCapabilities) GetExtensions() []*AgentExtension {
 	if x != nil {
 		return x.Extensions
@@ -97,11 +105,12 @@ var File_ai_agentcapabilities_proto protoreflect.FileDescriptor
 
 const file_ai_agentcapabilities_proto_rawDesc = "" +
 	"\n" +
-	"\x1aai/agentcapabilities.proto\x12\bnacos.ai\x1a\x17ai/agentextension.proto\"\xd1\x01\n" +
+	"\x1aai/agentcapabilities.proto\x12\bnacos.ai\x1a\x17ai/agentextension.proto\"\xff\x01\n" +
 	"\x11AgentCapabilities\x12\x1c\n" +
 	"\tstreaming\x18\x01 \x01(\bR\tstreaming\x12,\n" +
 	"\x11pushNotifications\x18\x02 \x01(\bR\x11pushNotifications\x126\n" +
-	"\x16stateTransitionHistory\x18\x03 \x01(\bR\x16stateTransitionHistory\x128\n" +
+	"\x16stateTransitionHistory\x18\x03 \x01(\bR\x16stateTransitionHistory\x12,\n" +
+	"\x11extendedAgentCard\x18\x05 \x01(\bR\x11extendedAgentCard\x128\n" +
 	"\n" +
 	"extensions\x18\x04 \x03(\v2\x18.nacos.ai.AgentExtensionR\n" +
 	"extensionsB*Z(github.com/cxhello/nacos-sdk-proto/go/aib\x06proto3"

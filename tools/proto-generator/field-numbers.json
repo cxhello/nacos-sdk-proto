@@ -20,7 +20,9 @@
         "supportTls" : 5,
         "version" : 6,
         "protocol" : 7,
-        "query" : 8
+        "query" : 8,
+        "protocolVersion" : 9,
+        "tenant" : 10
       },
       "reserved" : [ ]
     },
@@ -598,7 +600,10 @@
         "defaultOutputModes" : 16,
         "supportsAuthenticatedExtendedCard" : 17,
         "registrationType" : 18,
-        "latestVersion" : 19
+        "latestVersion" : 19,
+        "supportedInterfaces" : 20,
+        "securityRequirements" : 21,
+        "signatures" : 22
       },
       "reserved" : [ ]
     },
@@ -607,7 +612,8 @@
         "streaming" : 1,
         "pushNotifications" : 2,
         "stateTransitionHistory" : 3,
-        "extensions" : 4
+        "extensions" : 4,
+        "extendedAgentCard" : 5
       },
       "reserved" : [ ]
     },
@@ -635,7 +641,10 @@
     "AgentInterface" : {
       "fields" : {
         "url" : 1,
-        "transport" : 2
+        "transport" : 2,
+        "protocolBinding" : 3,
+        "protocolVersion" : 4,
+        "tenant" : 5
       },
       "reserved" : [ ]
     },
@@ -695,7 +704,8 @@
         "backendEndpoints" : 18,
         "frontendEndpoints" : 19,
         "toolSpec" : 20,
-        "allVersions" : 21
+        "allVersions" : 21,
+        "resourceSpec" : 22
       },
       "reserved" : [ ]
     },
@@ -944,7 +954,10 @@
         "security" : 14,
         "defaultInputModes" : 15,
         "defaultOutputModes" : 16,
-        "supportsAuthenticatedExtendedCard" : 17
+        "supportsAuthenticatedExtendedCard" : 17,
+        "supportedInterfaces" : 18,
+        "securityRequirements" : 19,
+        "signatures" : 20
       },
       "reserved" : [ ]
     },
@@ -965,7 +978,8 @@
         "mcpName" : 4,
         "serverSpecification" : 5,
         "toolSpecification" : 6,
-        "endpointSpecification" : 7
+        "endpointSpecification" : 7,
+        "resourceSpecification" : 8
       },
       "reserved" : [ ]
     },
@@ -1166,6 +1180,16 @@
       "fields" : {
         "serviceKey" : 1,
         "changedType" : 2
+      },
+      "reserved" : [ ]
+    },
+    "McpResourceSpecification" : {
+      "fields" : {
+        "specificationType" : 1,
+        "encryptData" : 2,
+        "resources" : 3,
+        "resourceTemplates" : 4,
+        "extensions" : 5
       },
       "reserved" : [ ]
     }

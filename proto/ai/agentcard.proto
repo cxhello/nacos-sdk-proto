@@ -24,11 +24,14 @@ message AgentCard {
   string url = 8;
   string preferredTransport = 9;
   repeated AgentInterface additionalInterfaces = 10;
+  repeated AgentInterface supportedInterfaces = 18;
   AgentProvider provider = 11;
   string documentationUrl = 12;
   map<string, SecurityScheme> securitySchemes = 13;
   repeated google.protobuf.Value security = 14;
+  repeated google.protobuf.Value securityRequirements = 19;
   repeated string defaultInputModes = 15;
   repeated string defaultOutputModes = 16;
   bool supportsAuthenticatedExtendedCard = 17;
+  repeated google.protobuf.Value signatures = 20;
 }
